@@ -1,0 +1,76 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Bootstrap CSS -->
+    {% bootstrap_css %}
+    <!-- Iconos Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Notificacion SweetAlert -->
+    <script type="text/javascript" src="{% static 'js/notificacionesSwAl.js' %}"></script>
+    <!-- Funciones JS -->
+    <script type="text/javascript" src="{% static 'js/funciones.js' %}"></script>
+    <!-- Fuente de letra de google -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!-- Icono Pestaña Efastmister -->
+    <link rel="shortcut icon" href="https://i.postimg.cc/76tMLTs4/logo.png"/>
+
+    <meta charset="UTF-8">
+    <title>EFastMister</title>
+    {% block style %}{% endblock %}
+
+    <!-- Estilo Personalizado para SweetAlert 2-->
+    <style>
+        .swal2-popup {
+            background-color: #38383d;
+            color: #ffff;
+            border-radius: 5%;
+        }
+
+        .swal2-styled.swal2-confirm {
+            border: 0;
+            border-color: transparent;
+            border-radius: 0.25em;
+            background-color: #28a745;
+            color: #fff;
+            font-size: 1em;
+        }
+
+        .swal2-styled.swal2-confirm:focus {
+            box-shadow: 0 0 0 3px transparent;
+        }
+
+        .swal2-styled.swal2-cancel {
+            border: 0;
+            border-radius: 0.25em;
+            background: initial;
+            background-color: #f34242;
+            color: #fff;
+            font-size: 1em;
+        }
+
+         .swal2-styled.swal2-cancel:focus {
+            box-shadow: 0 0 0 3px transparent;
+        }
+
+
+    </style>
+</head>
+<body>
+
+{% block content %}{% endblock %}
+
+<!-- Javascript Bootstrap -->
+{% bootstrap_javascript %}
+
+{% block script %}{% endblock %}
+
+<!-- Funciones JS Configuracion Comunidad -->
+<script type="text/javascript" src="{% static 'js/config_comunidad.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,685 @@
+{% extends 'main.html' %}
+{% load static %}
+<head>
+    {% block style %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+            body {
+                background-color: #29292a;
+                font-family: 'Poppins', sans-serif;
+                color: #ffff;
+            }
+
+
+            form {
+                border-radius: 20px;
+                background-color: transparent !important;
+            }
+
+            h4 {
+                padding-top: 15px;
+                font-size: 21px !important;
+                background: #38383d;
+            }
+
+            @media only screen and (max-width: 600px) {
+                form {
+                    width: 100% !important;
+                }
+            }
+
+            .button {
+                display: flex;
+                justify-content: center;
+            }
+
+            .btn.button {
+                width: 100%; /* Ajusta el ancho del botón según tus necesidades */
+                max-width: 400px; /* Puedes establecer un ancho máximo si lo deseas */
+                min-width: 400px;
+                background-color: #38383d;
+                padding: 20px;
+                border-radius: 10px;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+            }
+
+            .button h6 {
+                margin: 0;
+                font-size: 16px;
+            }
+
+            .button b {
+                font-size: 14px;
+                color: #919aa3;
+            }
+
+            .button a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .button i {
+                background-color: #38383d;
+            }
+
+            .divcentro {
+                display: flex;
+                justify-content: center;
+            }
+
+            .sw {
+                width: 100%;
+                background-color: #38383d;
+                color: #ffff;
+                transition: box-shadow .1s linear;
+                position: fixed;
+                top: 0;
+                flex-wrap: wrap;
+            }
+
+            .sw .sw-top {
+                background-color: #38383d;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 12px;
+            }
+
+            .sw-top-letf {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw-top-right {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw .sw-top-center {
+                background-color: #38383d;
+                flex-grow: 1;
+                margin: 0 12px;
+                overflow: hidden;
+            }
+
+            .sw .sw-title {
+                background-color: #38383d;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                font-size: 25px;
+                font-weight: 700;
+                text-align: center;
+            }
+
+            .sw .btn-round {
+                border: 0.1px solid #29292a;
+                border-radius: 50%;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #38383d;
+                font-size: 25px;
+                color: #ffff;
+            }
+
+            .mx-auto {
+                margin-right: auto !important;
+                margin-left: auto !important;
+                margin-top: 65px;
+            }
+
+            .imagen {
+                width: 89.5px;
+                height: 89.5px;
+                border-radius: 50%;
+                align-self: center;
+            }
+
+            /*! MODALES */
+            dialog::backdrop {
+                background-color: rgba(0, 0, 0, .55);
+                backdrop-filter: blur(5px);
+            }
+
+            dialog {
+                border-radius: 10px;
+                color: transparent;
+                background-color: #38383d;
+                font-family: 'Poppins', sans-serif;
+                max-height: 90%;
+            }
+
+            @media (min-width: 600px) {
+                dialog {
+                    min-width: 400px;
+                    max-height: 400px;
+                    min-height: 215px;
+                    margin-top: 300px;
+                    max-width: 430px;
+                    border-radius: 12px;
+                    align-self: center;
+                }
+            }
+
+            .popoup {
+                width: 100%;
+                border-radius: 12px 12px 0 0;
+                max-height: 90%;
+            }
+
+            .popup-close {
+                right: 12px;
+            }
+
+            .popup-close {
+                color: #ffff;
+                position: absolute;
+                top: 12px;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                border: 0.1px solid #29292a;
+                background-color: #38383d;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                box-shadow: none;
+                z-index: 3;
+
+            }
+
+            .popup-close:focus {
+                outline: none
+            }
+
+            .popup-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .content {
+                width: 100%;
+                padding: 24px;
+                overflow-y: auto;
+            }
+
+            .header {
+                width: 100%;
+                padding: 4px;
+                align-items: center;
+            }
+
+            .header h3 {
+                font-size: 17.24137931px;
+                color: #ffffff;
+                text-align: center;
+                align-items: center;
+            }
+
+            .input {
+                background-color: transparent;
+                margin-top: -30px;
+            }
+
+            input[type=text], select, input[type=file] {
+                appearance: none;
+                outline: 0;
+                border: 0;
+                background-color: transparent;
+                user-select: auto;
+                height: 44px;
+                border-bottom: 2px solid #ebedf169;
+                color: #ffffff;
+                font-size: 14.48275862px;
+                margin: 0 auto;
+                display: block;
+                text-align: left;
+                width: 100%;
+                cursor: pointer;
+                transition: border .1s linear;
+            }
+
+            /*! QUITAR CAMBIO DE COLOR DE FONDO CUANDO SELECCIONAS UN AUTOCOMPLETADO */
+            input:-webkit-autofill,
+            input:-webkit-autofill:hover,
+            input:-webkit-autofill:focus,
+            textarea:-webkit-autofill,
+            textarea:-webkit-autofill:hover,
+            textarea:-webkit-autofill:focus,
+            select:-webkit-autofill,
+            select:-webkit-autofill:hover,
+            select:-webkit-autofill:focus {
+                -webkit-text-fill-color: #ffffff;
+                transition: background-color 5000s ease-in-out 0s;
+            }
+
+            .footer {
+                width: 100%;
+                padding: 0 24px 24px 24px;
+            }
+
+            .buttons {
+                display: flex;
+                margin: 0 -6px;
+            }
+
+            .boton-guardar {
+                height: 44px;
+                border: #212529;
+                border-radius: 999px;
+
+                text-align: center;
+                transition: opacity .1s linear;
+                overflow: hidden;
+                font-size: 14.48275862px;
+                font-weight: 700;
+                background-color: #212529;
+                color: #ffffff;
+            }
+
+            .buttons .boton-guardar {
+                width: 100%;
+                margin: 0 6px;
+            }
+
+            .boton-guardar2 {
+                height: 44px;
+                border: #212529;
+                border-radius: 999px;
+
+                text-align: center;
+                transition: opacity .1s linear;
+                overflow: hidden;
+                font-size: 14.48275862px;
+                font-weight: 700;
+                background-color: #212529;
+                color: #ffffff;
+            }
+
+            .buttons .boton-guardar2 {
+                width: 100%;
+                margin: 0 6px;
+                margin-top: 30px;
+            }
+
+            .footer {
+                width: 100%;
+                padding: 0 24px 10px 24px;
+            }
+
+            .btn-round:hover {
+                background-color: #515154;
+            }
+
+            .button:hover {
+                background-color: #515154;
+            }
+
+             .go-back:hover {
+                background-color: #515154;
+            }
+
+            .boton-guardar:hover {
+                background-color: #515154;
+            }
+
+            /*! ESTILO PARA EL INPUT NUMERO DE MIEMBROS */
+
+            .number-input {
+                margin-top: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .number-input button {
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                margin: 0;
+                border: none;
+                font-size: 1.5rem;
+                background-color: transparent;
+                color: #fff;
+            }
+
+            .number-input button:hover {
+                background-color: #212529;
+            }
+
+            .number-input input {
+                border: transparent;
+                background-color: transparent;
+            }
+
+            input[type=number] {
+                height: 44px;
+                border-bottom: 2px solid #ebedf169;
+                color: #ffff;
+                font-size: 14.48275862px;
+                margin: 0 auto;
+                display: block;
+                text-align: left;
+                width: 100%;
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+                transition: border .1s linear;
+            }
+
+            .number-input input[type=number]:focus {
+                outline: none;
+            }
+
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            input[type=number] {
+                -moz-appearance: textfield;
+            }
+
+            /*! LOADING */
+            :root {
+                --b: #262626;
+                --w: #dcdcd2;
+                --s: 4s; /* change speed */
+            }
+
+            .overlay-loader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                backdrop-filter: blur(5px);
+                z-index: 9999;
+                display: none;
+            }
+
+            .content-loading {
+                width: 50vmin;
+                height: 50vmin;
+                text-align: center;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                perspective: 1000vmin;
+                top: 50%;
+                left: 50%;
+                position: absolute;
+                transform: translate(-50%, -50%);
+                z-index: 10000;
+            }
+
+            .bars {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                padding: 6.5vmin 3vmin;
+                animation: mirror1 calc(var(--s) * 2) ease 0s infinite;
+            }
+
+            .bars + .bars {
+                transform: rotate(90deg) rotateX(180deg);
+                animation: mirror2 calc(var(--s) * 2) ease calc(var(--s) / 2) infinite;
+            }
+
+            .bar {
+                width: 44vmin;
+                height: 3vmin;
+                margin: 2vmin 0;
+                background: linear-gradient(90deg, #fff0 33%, var(--w) 33% 67%, #fff0 67% 100%);
+                animation: grow var(--s) ease-in-out 0s infinite alternate;
+                background-size: 300%;
+                background-position-x: -203%;
+            }
+
+            @keyframes mirror1 {
+                0%, 47%, 99.99%, 100% {
+                    transform: rotate(180deg) rotateX(0deg);
+                }
+                47.01%, 99.98% {
+                    transform: rotate(180deg) rotateX(180deg);
+                }
+            }
+
+            @keyframes mirror2 {
+                0%, 47%, 99.99%, 100% {
+                    transform: rotate(90deg) rotateX(180deg);
+                }
+                47.01%, 99.98% {
+                    transform: rotate(90deg) rotateX(0deg);
+                }
+            }
+
+            @keyframes grow {
+                0%, 25% {
+                    background-position-x: -297%;
+                }
+                45%, 55% {
+                    background-position-x: -250%;
+                }
+                75%, 100% {
+                    background-position-x: -203%;
+                }
+            }
+
+            .bar:nth-child(2) {
+                animation-delay: calc(var(--s) * -0.02);
+            }
+
+            .bar:nth-child(3) {
+                animation-delay: calc(var(--s) * -0.04);
+            }
+
+            .bar:nth-child(4) {
+                animation-delay: calc(var(--s) * -0.06);
+            }
+
+            .bar:nth-child(5) {
+                animation-delay: calc(var(--s) * -0.08);
+            }
+
+            .bar:nth-child(6) {
+                animation-delay: calc(var(--s) * -0.1);
+            }
+
+            .bar:nth-child(7) {
+                animation-delay: calc(var(--s) * -0.12);
+            }
+
+            .bars:nth-child(2) .bar:nth-child(1) {
+                animation-delay: calc(calc(var(--s) * -0.001) - calc(var(--s) / 2));
+            }
+
+            .bars:nth-child(2) .bar:nth-child(2) {
+                animation-delay: calc(calc(var(--s) * -0.02) - calc(var(--s) / 2));
+            }
+
+            .bars:nth-child(2) .bar:nth-child(3) {
+                animation-delay: calc(calc(var(--s) * -0.04) - calc(var(--s) / 2));
+            }
+
+            .bars:nth-child(2) .bar:nth-child(4) {
+                animation-delay: calc(calc(var(--s) * -0.06) - calc(var(--s) / 2));
+            }
+
+            .bars:nth-child(2) .bar:nth-child(5) {
+                animation-delay: calc(calc(var(--s) * -0.08) - calc(var(--s) / 2));
+            }
+
+            .bars:nth-child(2) .bar:nth-child(6) {
+                animation-delay: calc(calc(var(--s) * -0.1) - calc(var(--s) / 2));
+            }
+
+            .bars:nth-child(2) .bar:nth-child(7) {
+                animation-delay: calc(calc(var(--s) * -0.12) - calc(var(--s) / 2));
+            }
+
+        </style>
+    {% endblock %}
+
+
+    {% block script %}
+        <script type="text/javascript" src="{% static 'js/loading.js' %}"></script>
+    {% endblock %}
+
+</head>
+
+<body>
+{% block content %}
+
+    <!--! Alertas SweetAlert 2-->
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <script>
+                    notificacionSwAl('¡Éxito!',
+                        '{{ message }}',
+                        'success',
+                        'Aceptar', 'exitoso')
+
+
+
+                </script>
+            {% elif message.tags == 'error' %}
+                <script>
+                    notificacionSwAl('¡Error!',
+                        '{{ message }}',
+                        'error',
+                        'Aceptar')
+
+
+
+                </script>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+
+    <!--! CARGANDO -->
+
+    <div class="overlay-loader" id="loading-overlay">
+        <div class="content-loading">
+            <div class="bars">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="bars">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+        </div>
+
+        <div style="text-align: center; top: 75%; position: relative;">
+            <h2>Cargando...</h2>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sw">
+                <div class="sw-top">
+                    <div class="sw-top-letf">
+                        <a class="btn-round" href="{% url 'logout' %}"
+                           style="text-decoration: none"><</a>
+                    </div>
+                    <div class="sw-top-center">
+                        <div class="sw-title">📊🛠️ Panel de Administración</div>
+                    </div>
+                    <div class="sw-top-right"></div>
+                </div>
+            </div>
+            <form class="mx-auto" method="POST" action="{% url 'webscraping' %}">
+                {% csrf_token %}
+                <div class="mb-3 mt-3 divcentro">
+                    <button class="btn button" id="boton-scrapear-jugadores" name="accion" value="jugadores"
+                            type="submit" onclick="cargarDatos()">
+                        <h6 class="">🔁🏃🏼‍♂️Actualizar jugadores</h6>
+                        <b class="mt-1">Actualizar datos de los jugadores</b>
+                    </button>
+                </div>
+                <div class="mb-3 divcentro">
+                    <button class="btn button" id="boton-scrapear-jornadas" name="accion" value="jornadas"
+                            type="submit" onclick="cargarDatos()">
+                        <h6>🔁📆 Actualizar jornadas</h6>
+                        <b class="mt-1">Actualizar resultados de las jornadas</b>
+                    </button>
+                </div>
+                <div class="mb-3 divcentro" id="abrir-modal-creacion-mensaje">
+                    <a class="btn button">
+                        <h6>📝👪 Mensaje para comunidad</h6>
+                        <b class="mt-1">Creación de mensaje para las diferentes comunidades</b>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--!------------------->
+    <!--! DIALOGS MODALES -->
+    <!--!------------------->
+    <dialog id="modal-creacion-mensaje">
+        <div class="popoup">
+            <b>
+                <button class="popup-close go-back" id="cerrar-modal-creacion-mensaje">X</button>
+            </b>
+
+            <div class="popup-content" style="max-height: 843.3px">
+                <div class="header">
+                    <h3>📝👪 Mensaje para comunidad</h3>
+                </div>
+                <form method="post" action="{% url 'crear_nueva_noticia' %}">
+
+                    {% csrf_token %}
+                    <div class="content">
+                        <div class="input">
+                            <input style="text-align: left; font-size:14.48275862px;" type="text" class="mt-4"
+                                   name="titulo" id="titulo" required placeholder="Titulo del mensaje">
+                            <textarea
+                                    style="text-align: left; font-size:14.48275862px; width: 100%; background: transparent; color: white; border-color: #ebedf169;"
+                                    type="text" class="mt-4"
+                                    name="descripcion" id="descripcion" required placeholder="Cuerpo del mensaje"
+                                    rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar" type="submit">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+{% endblock %}
+
+{#{% block script %}#}
+{#    <script type="text/javascript" src="{% static 'js/loading.js' %}"></script>#}
+{#{% endblock %}#}
+</body>

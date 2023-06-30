@@ -1,0 +1,156 @@
+{% extends 'main.html' %}
+{% load static %}
+<head>
+    {% block style %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: #29292a;
+                color: #ffffff;
+            }
+
+            .side-image {
+                background-image: url("https://i.postimg.cc/SxRT7k9D/2.jpg");
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: relative;
+                border-radius: 10px 0 0 10px;
+            }
+
+            .border {
+                border: 1px solid #dee2e6c4 !important;
+            }
+
+            .superpuesta {
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                object-fit: cover;
+            }
+
+            .box-area {
+                width: 930px;
+            }
+
+            .right-box {
+                padding: 40px 30px 40px 40px;
+            }
+
+            ::placeholder {
+                font-size: 16px;
+            }
+
+            .rounded-4 {
+                border-radius: 20px;
+            }
+
+            .rounded-5 {
+                border-radius: 30px;
+            }
+
+            @media only screen and (max-width: 768px) {
+                .box-area {
+                    margin: 0 10px;
+
+                }
+
+                .left-box {
+                    height: 100px;
+                    overflow: hidden;
+                }
+
+                .right-box {
+                    padding: 20px;
+                }
+            }
+        </style>
+    {% endblock %}
+
+</head>
+<body>
+{% block content %}
+    <form id="register_form" method="POST" action="">
+        <div class="container d-flex justify-content-center align-items-center min-vh-100">
+
+            <div class="row border rounded-5 p-3 shadow box-area" style="background-color: #38383d;">
+                <div class="col-md-6 rounded-4 side-image">
+                    <img class="superpuesta" src="https://i.postimg.cc/76tMLTs4/logo.png" alt="">
+                </div>
+                <div class="col-md-6 right-box">
+                    <div class="row align-items-center">
+                        <div class="header-text mb-4">
+
+                            <h2>Registro</h2>
+                            <p></p>
+
+                            {% csrf_token %}
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {% if message.tags == 'success' %}
+                                        <script>
+                                            notificacionSwAl('¡Registro exitoso!',
+                                                '{{ message }}',
+                                                'success',
+                                                'Aceptar', 'exitoso', '{% url 'login' %}')
+                                        </script>
+                                    {% elif message.tags == 'error' %}
+                                        <script>
+                                            notificacionSwAl('Error en el registro',
+                                                '{{ message }}',
+                                                'error',
+                                                'Aceptar')
+                                        </script>
+                                    {% elif message.tags == 'info' %}
+                                        <script>
+                                            notificacionSwAl('',
+                                                '{{ message }}',
+                                                'info',
+                                                'Aceptar', 'info')
+                                        </script>
+                                    {% endif %}
+
+                                {% endfor %}
+                            {% endif %}
+
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6 input"
+                                   placeholder="Username"
+                                   name="username" id="username" required="required"/>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control form-control-lg bg-light fs-6 input"
+                                   placeholder="Correo"
+                                   name="correo" id="correo" required="required"/>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control form-control-lg bg-light fs-6"
+                                   placeholder="Contraseña" name="password1" id="password1" required="required"/>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" class="form-control form-control-lg bg-light fs-6"
+                                   placeholder="Repite su contraseña" name="password2" id="password2"
+                                   required="required"/>
+                        </div>
+                        <div class="input-group mb-5 d-flex justify-content-between"></div>
+                        <div class="input-group mb-3">
+                            <button class="btn btn-lg btn-primary w-100 fs-6">Registrarme</button>
+                        </div>
+                        <div class="row">
+                            <small> Tienes cuenta? <a href="{% url 'login' %}">Login</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+</body>
+

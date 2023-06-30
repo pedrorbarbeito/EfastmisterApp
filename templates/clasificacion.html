@@ -1,0 +1,730 @@
+{% extends 'main.html' %}
+{% load static %}
+<head>
+    {% block style %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+            body {
+                background-color: #29292a;
+                font-family: 'Poppins', sans-serif;
+                color: #ffff;
+            }
+
+            /*!!!! ESTILOS PARA HEADER !!!!*/
+
+            .nav-top header {
+                position: fixed;
+                top: 0;
+                transition: box-shadow .1s linear;
+            }
+
+            header {
+                width: 100%;
+            }
+
+            .header-top {
+                background-color: #38383d;
+                height: 60px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+
+            .header-top .header-top-left {
+                left: 0;
+            }
+
+            .header-top .header-top-right {
+                position: absolute;
+                top: 0;
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+
+            .header-top-left {
+                top: 0;
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+
+            .btn {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                cursor: pointer;
+                border: 0;
+                outline: 0;
+                display: block;
+                background-color: transparent;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .header-top #toggle-menu {
+                padding: 0;
+                width: 37.14285714px;
+                margin-left: 12px;
+                position: relative;
+            }
+
+            .pic {
+                width: 60px;
+                height: 60px;
+                border-radius: 55%;
+                object-fit: cover; /* * HACER QUE LA IMAGEN RELLENE EL MARCO PARA QUE NO QUEDE ESTIRADA */
+                position: relative;
+                color: #fff;
+                font-size: 17.24137931px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+
+            }
+
+            .header-top #toggle-menu .pic {
+                width: 50px;
+                height: 50px;
+            }
+
+            .header-top .header-top-center {
+                width: 100%;
+                text-align: center;
+                display: flex;
+                align-items: center;
+            }
+
+            .header-top .title {
+                position: relative;
+                flex-grow: 0.95;
+                height: 100%;
+                overflow: hidden;
+                font-size: 17.24137931px;
+                color: #ffff;
+                font-weight: 700;
+            }
+
+            @media (max-width: 1280px) {
+                .header-top .title {
+                    position: relative;
+                    flex-grow: 0.93;
+                    height: 100%;
+                    overflow: hidden;
+                    font-size: 17.24137931px;
+                    color: #ffff;
+                    font-weight: 700;
+                }
+            }
+
+            .header-top .header-top-right {
+                right: 0;
+            }
+
+            .btn-header-top {
+                color: #ffff;
+                background-color: #38383d;
+                height: 37.14285714px;
+                border-radius: 999px;
+                padding: 0 12px;
+                font-size: 20px;
+                font-weight: 700;
+                margin-right: 12px;
+                position: relative;
+                border: 0.1px solid #29292a !important;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .header-top .header-top-right .btn-search-players {
+                border-radius: 50%;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                padding: 0;
+            }
+
+            .header-menu {
+                background-color: #38383d;
+            }
+
+            .menu {
+                overflow: hidden;
+                width: 100%;
+                max-width: 1000px;
+                margin: auto;
+                display: flex;
+            }
+
+            .menu li {
+                list-style: none;
+                display: block;
+                flex-grow: 0.187;
+                flex-basis: 0;
+                text-align: center;
+            }
+
+            .menu li a {
+                height: 54px;
+                position: relative;
+                flex-direction: column;
+            }
+
+            a.btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .menu li .svg {
+                color: #ffff;
+                width: 18.57142857px;
+                height: 18.57142857px;
+                fill: #ffff;
+            }
+
+            .menu li .title {
+                font-size: 13.034483px;
+                font-weight: 700;
+                color: #f8f9faa1;
+                margin-top: 4px;
+                position: relative;
+            }
+
+            .title.active {
+                color: #ffff !important;
+            }
+
+            .btn-balance {
+                color: #ffff;
+                font-size: 17px;
+                font-weight: 700;
+                align-items: center;
+                justify-content: center;
+            }
+
+            div.btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            img.coin-real {
+                width: 30px;
+                height: 30px;
+            }
+
+            .btn.btn-balance:hover {
+                background: transparent;
+            }
+
+            .saldo {
+                color: #fff;
+            }
+
+            /*!!!! ESTILOS DEL MENU IZQUIERDO PARA EL USUARIO !!!!*/
+            .sidenav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: #29292a;
+                overflow-x: hidden;
+                transition: 0.4s;
+            }
+
+            .sidenav a {
+                text-decoration: none;
+                font-size: 25px;
+                color: rgb(169, 169, 169);
+                display: block;
+                transition: 0.2s;
+            }
+
+            .sidenav a:hover {
+                color: #fffefe;
+            }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            .sidenav .perfil {
+                position: absolute;
+                top: 0;
+                left: 0;
+                margin-top: 15px;
+            }
+
+            @media screen and (max-height: 450px) {
+                .sidenav {
+                    padding-top: 15px;
+                }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+            }
+
+            #mySidenav .d-flex {
+                background-color: #38383d;
+                padding: 8px;
+                display: flex;
+                width: 280px;
+                align-items: center;
+                border-bottom: 1px solid #1b1b1c;
+            }
+
+            .competition-logo img {
+                max-width: 40px;
+                max-height: 40px;
+            }
+
+            #mySidenav .d-flex + .header-placeholder {
+                height: 12px;
+                flex-shrink: 0;
+            }
+
+            #mySidenav .communities {
+                padding-top: 0;
+            }
+
+            #mySidenav .communities .type {
+                font-weight: 700;
+                font-size: 17.24137931px;
+                padding: 18px;
+                color: #fffefe;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            #mySidenav ul {
+                list-style-type: none;
+            }
+
+            #mySidenav ul a {
+                display: flex;
+                padding: 18px;
+                color: rgb(169, 169, 169);
+                font-size: 17.24137931px;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            #mySidenav ul a.active {
+                padding-left: 15px;
+                border-left: 6px solid #32c075;
+                font-weight: 700;
+                color: #32c075;
+            }
+
+            .competition-logo {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                vertical-align: middle;
+            }
+
+            .competition-logo {
+                font-size: 18px;
+                width: 24px;
+                height: 24px;
+            }
+
+            #mySidenav ul a .competition-logo {
+                margin-right: 6px;
+            }
+
+            .competition-logo img {
+                max-width: 40px;
+                max-height: 40px;
+            }
+
+            #mySidenav .bottom {
+                background-color: #38383d;
+                border-top: 1px solid #1b1b1c;
+                display: flex;
+                align-items: center;
+                padding: 12px;
+                width: 280px;
+                margin-top: auto;
+                flex-shrink: 0;
+                justify-content: space-between;
+                position: absolute;
+                bottom: 0;
+            }
+
+            .btn {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                cursor: pointer;
+                border: 0;
+                outline: 0;
+                display: block;
+                background-color: transparent;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .btn-dark {
+                display: flex;
+                align-items: center;
+                height: 44px;
+                border-radius: 999px;
+                text-align: center;
+                overflow: hidden;
+                font-size: 14.80px;
+                font-weight: 700;
+                background-color: #000000;
+                color: rgb(255 255 255);
+            }
+
+            .btn-grey {
+                align-items: center;
+                height: 44px;
+                border-radius: 999px;
+                text-align: center;
+                overflow: hidden;
+                font-size: 14.80px;
+                font-weight: 700;
+                background-color: #cdcdd0;
+                color: #000000;
+                display: flex;
+            }
+
+            #mySidenav .btn-add {
+                display: flex;
+                align-items: center;
+                width: 50%;
+                font-size: 14.80px;
+                color: rgb(255 255 255);
+                height: 50px;
+            }
+
+            #mySidenav .btn-out {
+                display: flex;
+                align-items: center;
+                width: 50%;
+                font-size: 14.80px;
+                color: #000000;
+                height: 50px;
+            }
+
+            .name {
+                font-weight: 700;
+                font-size: 15.17241379px;
+                display: flex;
+                align-items: center;
+            }
+
+            .btn:focus {
+                box-shadow: none;
+            }
+
+            /*!!!! ESTILOS PARA PAGINA CLASIFICACION !!!!*/
+            #content > .wrapper {
+                position: relative;
+            }
+
+            .wrapper {
+                max-width: 600px;
+                margin: auto;
+            }
+
+            .tabs-wrapper {
+                display: flex;
+                justify-content: center;
+            }
+
+            .tabs-standings {
+                margin: 24px auto;
+                max-width: 90%;
+            }
+
+            .tabs-round {
+                background-color: #29292b;
+                border: 1.5px solid #1b1b1b;
+                border-radius: 999px;
+            }
+
+            .tabs {
+                display: flex;
+                font-weight: 700;
+            }
+
+            .tabs .tab {
+                flex-grow: 1;
+                flex-basis: 0;
+                margin: auto;
+            }
+
+            .tabs-round .tab {
+                height: 37.14285714px;
+                border-radius: 999px;
+                color: #a1a1a1;
+                width: 128.57142857px;
+                font-size: 14.48275862px;
+            }
+
+            .tabs-round .tab.active {
+                background-color: #b1b1b1;
+                color: #000000;
+            }
+
+            .panels-standings .user-list li {
+                padding: 0 6px;
+                border-bottom: 0;
+            }
+
+            .user-row {
+                display: flex;
+                align-items: center;
+                padding: 12px;
+            }
+
+            .user-row .user {
+                display: flex;
+                flex-grow: 1;
+                align-items: center;
+                justify-content: flex-start;
+                color: #ffff;
+            }
+
+            .list {
+                margin-left: -25px;
+            }
+
+            a.btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .user .position {
+                font-family: math;
+                font-size: 17.79310345px;
+                font-weight: 700;
+                margin-right: 18px;
+                color: #959ba5;
+            }
+
+            .user .pic {
+                width: 41.42857143px;
+                height: 41.42857143px;
+                right: 0;
+            }
+
+            .user-row .user .info {
+            / flex-grow: 1;
+                margin-left: 8px;
+            }
+
+            .user-row .user .info .name {
+                font-weight: 700;
+                font-size: 15.17241379px;
+                display: flex;
+                align-items: center;
+            }
+
+            .panels-standings .user-list .myself {
+                color: #fff;
+            }
+
+            .panels-standings .user-list .played {
+                color: #959ba5;
+                font-size: 12.4137931px;
+                margin-top: 6px;
+            }
+
+            .panels-standings .user-list .points {
+                font-size: 15.17241379px;
+                font-weight: 700;
+                text-align: right;
+                color: #fff;
+                margin-left: auto;
+            }
+
+            .panels-standings .user-list .points span {
+                color: #959ba5;
+                font-size: 9.65517241px;
+                text-transform: uppercase;
+                margin-top: 4px;
+
+            }
+
+            /*!!!! ESTILOS PARA PAGINA CLASIFICACION POR JORNADAS !!!!*/
+            .panels-standings .top {
+                padding: 0px 20px;
+                display: flex;
+            }
+
+            input, select, textarea {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                outline: 0;
+                border: 0;
+                background-color: transparent;
+                -webkit-user-select: auto;
+                -moz-user-select: auto;
+                -ms-user-select: auto;
+                user-select: auto;
+            }
+
+            select {
+                height: 44px;
+                border-bottom: 1px solid #1b1b1c;
+                color: #ffff;
+                font-size: 14.48275862px;
+                margin: 0 auto;
+                display: block;
+                text-align: left;
+                width: 100%;
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+                transition: border .1s linear;
+            }
+
+            .panels-standings .top select {
+                height: 38px;
+                padding: 0 12px;
+                font-size: 14.48275862px;
+                color: #fff;
+            }
+
+            select {
+                background: #38383d;
+                border: 0.1px solid #1b1b1b;
+                border-radius: 999px;
+                --bg-image-gradient: transparent 50%, #99a5b8 50% calc(50% + 1px), transparent calc(50% + 2px);
+                background-image: linear-gradient(45deg, var(--bg-image-gradient)), linear-gradient(-45deg, var(--bg-image-gradient));
+                background-position: right 20px top 50%, right 15px top 50%;
+                background-size: 5px;
+                background-repeat: no-repeat;
+                padding: 0 12px;
+            }
+
+            select option {
+                background-color: #38383d;
+            }
+
+            .btn:hover {
+                background-color: #515154;
+            }
+
+            button#toggle-menu:hover {
+                background: transparent;
+            }
+
+
+
+
+        </style>
+    {% endblock %}
+
+</head>
+
+<body>
+{% block content %}
+    {% include 'menu_desplegable.html' %}
+    <div id="prueba2">
+        {% include 'navbar.html' %}
+        <div class="wrapper">
+            <div class="tabs-wrapper">
+                <div class="tabs tabs-round tabs-standings">
+                    <button class="btn tab active">General</button>
+
+                    <!--Por jornadas-->
+                    <!--<button class="btn tab active">Jornada</button> -->
+                </div>
+            </div>
+            <div class="panels panels-standings">
+                <div class="panel panel-total">
+                    <ol class="user-list">
+                        {% for i in clasificacion %}
+                            <li>
+                                <div class="user-row">
+                                    <a class="btn btn-sw-link user">
+                                        <div class="position"></div>
+
+                                            <img class="pic"
+                                                 src="{{ i.perfil.profile_image.url }}">
+
+                                        <div class="info">
+                                            <div class="name myself">{{ i.user.username }}</div>
+                                            <!--<div class="played ">13 jugadores · 59.467.000</div>-->
+                                        </div>
+                                        <div class="points">{{ i.puntosTotales }}<span>pts</span></div>
+                                    </a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Por jornadas-->
+            <!--<div class="panels panels-standings">
+                <div class="panel panel-gameweek">
+                    <div class="top">
+                        <select>
+                            <option value="1" selected>Jornada 1</option>
+                            <option value="2">Jornada 2</option>
+                            <option value="3">Jornada 3</option>
+                        </select>
+                    </div>
+                    <ol class="user-list">
+                        <li class="list">
+                            <div class="user-row mt-3">
+                                <a class="btn btn-sw-link user">
+                                    <div class="position"></div>
+                                    <img class="pic" src="https://d1.gomister.com/img/competitions/1.png?1635946738">
+                                    <div class="info">
+                                        <div class="name myself">david dominguez</div>
+                                        <div class="played ">13 jugadores · 59.467.000</div>
+                                    </div>
+                                    <div class="points">97<span>pts</span></div>
+                                </a>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>-->
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        /*!!!! FUNCIONES PARA EL MENU DEL NAVBAR DEL USUARIO !!!!*/
+        function abrirMenu() {
+            document.getElementById("mySidenav").style.width = "280px";
+
+            document.getElementById("prueba2").style.transform = "translate3d(280px, 0px, 0px)";
+            document.body.style.overflow = "hidden";
+        }
+
+        function cerrarMenu() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("prueba2").style.transform = "translate3d(0px, 0px, 0px)";
+            document.body.style.overflow = "auto";
+        }
+
+
+    </script>
+{% endblock %}
+</body>

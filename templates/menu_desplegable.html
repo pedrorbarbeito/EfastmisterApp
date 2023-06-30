@@ -1,0 +1,32 @@
+<!--! MENU IZQUIERDO DEL USUARIO -->
+<div id="mySidenav" class="sidenav">
+    <div class="d-flex justify-content-between">
+        <a href="javascript:void(0)" class="cerrar"
+           onclick="cerrarMenu()">&times;</a>
+        <img class="pic" src="{{ perfil.profile_image.url }}">
+        <a class="btn"
+           href="{% url 'perfil' %}">
+            ⚙️
+        </a>
+    </div>
+    <div class="header-placeholder"></div>
+    <div class="communities">
+        <div class="type">Tus ligas</div>
+        <ul>
+            {% for comunidad_del_usuario in comunidades_del_usuario %}
+                <li style="margin-left: -42px;">
+                    <a class="btn {% if comunidad.id == comunidad_del_usuario.comunidad.id%}active{% endif %}" href="{% url 'pagina_principal_comunidad' id_comunidad=comunidad_del_usuario.comunidad.id %}">
+                        <div class="competition-logo">
+                            <img src="{{ comunidad_del_usuario.comunidad.profile_image.url }}" class="pic" loading="lazy">
+                        </div>
+                        <div class="name ml-2">{{ comunidad_del_usuario.comunidad.nombre_comunidad }}</div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="bottom">
+        <a class="btn btn-dark btn-add" href="{% url 'vista_elegir_comunidad' %}">Añadir liga</a>
+        <a class="btn btn-grey btn-out" href="{% url 'logout' %}">Cerrar Sesión</a>
+    </div>
+</div>

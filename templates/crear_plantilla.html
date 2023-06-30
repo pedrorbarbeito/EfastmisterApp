@@ -1,0 +1,317 @@
+{% extends 'main.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block style %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+            body {
+                background-color: #29292a;
+                font-family: 'Poppins', sans-serif;
+                color: #ffff;
+            }
+
+            .sw {
+                width: 100%;
+                color: #ffff;
+                transition: box-shadow .1s linear;
+                position: fixed;
+                top: 0;
+                flex-wrap: wrap;
+            }
+
+            .sw .sw-topbar {
+                background-color: #38383d;
+                color: #ffff;
+                width: 100%;
+                transition: box-shadow .1s linear;
+                position: fixed;
+                top: 0;
+                flex-wrap: wrap;
+                z-index: 9999;
+            }
+
+            .sw .sw-top {
+                background-color: #38383d;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 12px;
+            }
+
+            .sw-top-letf {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw .btn-round {
+                border: 0.1px solid #29292a;
+                border-radius: 50%;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 25px;
+                color: #ffff;
+            }
+
+            a.btn-round {
+                text-decoration: none;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .sw-top-center {
+                flex-grow: 1;
+                margin: 0 12px;
+                overflow: hidden;
+            }
+
+            .sw-title {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                font-size: 18px;
+                font-weight: 700;
+                text-align: center;
+            }
+
+            .sw-top-right {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw-topbar-placeholder {
+                height: 3px;
+            }
+
+            .sw-settings {
+                padding-bottom: 12px;
+            }
+
+            .wrapper {
+                max-width: 600px;
+                margin: auto;
+            }
+
+            .sw-settings ul {
+                list-style: none;
+                margin: 12px;
+            }
+
+            .box {
+                background-color: #38383d;
+                margin-bottom: 24px;
+                border-radius: 12px;
+            }
+
+            .sw-settings ul li {
+                margin-left: -40px;
+                padding: 12px;
+                position: relative;
+            }
+
+            .pic {
+                width: 100px;
+                height: 100px;
+                border-radius: 50px;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
+                z-index: 1;
+                color: #fff;
+                font-size: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .pic {
+                margin: auto;
+            }
+
+            img {
+                vertical-align: middle;
+                border-style: none;
+            }
+
+            .header.mt-2 {
+                justify-content: center;
+                display: flex;
+                width: 100%;
+                padding: 4px;
+                align-items: center;
+            }
+
+            label {
+                justify-content: center;
+                width: 100%;
+                padding: 4px;
+                align-items: center;
+                display: flex;
+                margin-bottom: 0.5rem;
+            }
+
+            input, select, textarea {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                outline: 0;
+                border: 0;
+                background-color: transparent;
+                -webkit-user-select: auto;
+                -moz-user-select: auto;
+                -ms-user-select: auto;
+                user-select: auto;
+            }
+
+            select {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background: 0 0;
+                text-align: center;
+                text-align-last: center;
+            }
+
+            select optgroup, select option {
+                background-color: #38383d;
+            }
+
+            select:focus {
+                outline: 0;
+                border: 0.1px solid #32c075;
+            }
+
+            select {
+                height: 44px;
+                border-bottom: 2px solid #29292a;
+                color: #ffffff;
+                font-size: 14.48275862px;
+                margin: 0 auto;
+                display: block;
+                text-align: left;
+                width: 200px;
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+                transition: border .1s linear;
+            }
+
+            select {
+                border: 0.1px solid #29292a;
+                border-radius: 999px;
+                --bg-image-gradient: transparent 50%, #ffffff 50% calc(50% + 1px), transparent calc(50% + 2px);
+                background-image: linear-gradient(45deg, var(--bg-image-gradient)), linear-gradient(-45deg, var(--bg-image-gradient));
+                background-position: right 20px top 50%, right 15px top 50%;
+                background-size: 5px;
+                background-repeat: no-repeat;
+                padding: 0 12px;
+            }
+
+            .center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .buttons {
+                width: 50%;
+                display: flex;
+            }
+
+            .btn-grey {
+                height: 40px;
+                border-radius: 999px;
+                text-align: center;
+                transition: opacity .1s linear;
+                overflow: hidden;
+                font-size: 14.80px;
+                font-weight: 700;
+                background-color: #000000;
+                color: #fff;
+                width: 50%;
+            }
+
+            .buttons .btn {
+                flex-grow: 1;
+                flex-basis: 0;
+                margin: 0 6px;
+            }
+
+            .btn-grey:hover {
+                color: #ffff;
+                background-color: #515154;
+            }
+
+            .btn:focus,
+            .btn:active {
+                outline: none;
+                box-shadow: none;
+            }
+        </style>
+    {% endblock %}
+</head>
+
+<body>
+{% block content %}
+
+    {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'info' %}
+                        <script>
+                            notificacionSwAl('',
+                                '{{ message }}',
+                                'info',
+                                'Aceptar', '{% url 'mercado' %}')
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="sw">
+                <div class="sw-top">
+                    <div class="sw-top-letf"></div>
+                    <div class="sw-top-center">
+                        <div class="sw-title">♟️⚽️ Crear Plantilla</div>
+                    </div>
+                    <div class="sw-top-right"></div>
+                </div>
+                <div class="sw-topbar-placeholder"></div>
+                <div class="wrapper sw-settings">
+                    <ul class="box">
+                        <li class="avatar">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <img class="pic"
+                                     src="https://store-images.s-microsoft.com/image/apps.59592.13510798882825301.ba0fd424-c85f-4319-a89c-d6317ce4aca5.9d0af837-0d24-4fde-8449-8717e49ced44?mode=scale&q=90&h=200&w=200&background=%23000000">
+                                <div class="header mt-2">
+                                    {{ form.as_p }}
+                                </div>
+                                <div class="center">
+                                    <div class="buttons">
+                                        <button type="submit" href="{% url 'guardar_plantilla' %}" value="Guardar"
+                                                class="btn btn-grey btn-pic-delete"> Crear
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+</body>

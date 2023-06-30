@@ -1,0 +1,1087 @@
+{% extends 'main.html' %}
+{% load humanize %}
+{% load static %}
+<head>
+    {% block style %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+            body {
+                background-color: #29292a;
+                font-family: 'Poppins', sans-serif;
+                color: #ffff;
+            }
+
+            form {
+                margin: auto;
+                max-width: 600px;
+                border-radius: 20px;
+                background-color: transparent !important;
+            }
+
+            h4 {
+                padding-top: 15px;
+                font-size: 21px !important;
+                background: #38383d;
+            }
+
+
+            .button {
+                display: flex;
+                justify-content: center;
+            }
+
+            .btn.button {
+                width: 100%; /* Ajusta el ancho del botón según tus necesidades */
+                max-width: 400px; /* Puedes establecer un ancho máximo si lo deseas */
+                min-width: 400px;
+                background-color: #38383d;
+                padding: 20px;
+                border-radius: 10px;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+            }
+
+            .button h6 {
+                background-color: #38383d;
+                margin: 0;
+                font-size: 16px;
+            }
+
+            .button b {
+                background-color: #38383d;
+                font-size: 14px;
+                color: #919aa3;
+            }
+
+            .button a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .button i {
+                background-color: #38383d;
+            }
+
+
+            .sw {
+                width: 100%;
+                color: #ffff;
+                transition: box-shadow .1s linear;
+                position: fixed;
+                top: 0;
+                flex-wrap: wrap;
+            }
+
+            .sw .sw-top {
+                background-color: #38383d;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 12px;
+            }
+
+            .sw-top-letf {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw-top-right {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw .sw-top-center {
+                background-color: #38383d;
+                flex-grow: 1;
+                margin: 0 12px;
+            }
+
+            .sw .sw-top-search {
+                background-color: #29292a;
+                border-radius: 999px;
+                border: 0;
+                text-align: center;
+                width: 100%;
+                height: 37.14285714px;
+                color: #ffff;
+            }
+
+            .sw .btn-round {
+                border: 0.1px solid #29292a;
+                border-radius: 50%;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 25px;
+                color: #ffff;
+            }
+
+            .sw .sw-top-bottom {
+                background-color: #38383d;
+                padding: 0 12px 12px 12px;
+            }
+
+            .sw .sw-top-bottom .buttons {
+                display: flex;
+                margin: 0 -6px;
+            }
+
+            .mx-auto {
+                margin-right: auto !important;
+                margin-left: auto !important;
+                margin-top: 135px;
+            }
+
+            input, select, textarea {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                outline: 0;
+                border: 0;
+                background-color: transparent;
+                -webkit-user-select: auto;
+                -moz-user-select: auto;
+                -ms-user-select: auto;
+                user-select: auto;
+            }
+
+            input[type=text] {
+                height: 44px;
+                border-bottom: 2px solid #ebedf169;
+                color: #ffffff;;
+                font-size: 14.48275862px;
+                margin: 0 auto;
+                display: block;
+                text-align: left;
+                width: 100%;
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+                transition: border .1s linear;
+            }
+
+            .btnplayers {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                cursor: pointer;
+                border: 0;
+                outline: 0;
+                display: block;
+                background-color: transparent;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .btn-border {
+                height: 44px;
+                border-radius: 999px;
+                text-align: center;
+                transition: opacity .1s linear;
+                font-size: 14.48275862px;
+                font-weight: 700;
+                background-color: transparent;
+                color: #ffffff;
+                border: 0.1px solid #29292a;
+            }
+
+            .sw .buttons-players select {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background: 0 0;
+                text-align: center;
+                text-align-last: center;
+            }
+
+            .sw .buttons-players .btnplayers {
+                height: 37.14285714px;
+                font-size: 13.79310345px;
+            }
+
+            .sw .sw-top-bottom .buttons .btnplayers {
+                flex-basis: 0;
+                flex-grow: 1;
+                margin: 0 6px;
+            }
+
+            select optgroup, select option {
+                background-color: #38383d;
+            }
+
+            select:focus {
+                outline: 0;
+                border: 0.1px solid #32c075;
+            }
+
+            .sw-topbar-placeholder {
+                height: 3px;
+            }
+
+            /* MODALES */
+            dialog::backdrop {
+                background-color: rgba(0, 0, 0, .55);
+                backdrop-filter: blur(5px);
+            }
+
+            dialog {
+                max-width: 90%;
+                border-radius: 10px;
+                color: transparent;
+                background-color: #38383d;
+                font-family: 'Poppins', sans-serif;
+                max-height: 90%;
+            }
+
+            @media (min-width: 600px) {
+                dialog {
+                    min-width: 500px;
+                    min-height: 400px;
+                    max-width: 550px;
+                    border-radius: 12px;
+                    align-self: center;
+                }
+            }
+
+            .popup {
+                width: 100%;
+                border-radius: 12px 12px 0 0;
+                max-height: 90%;
+            }
+
+            .popup-close {
+                right: 12px;
+            }
+
+            .popup-close {
+                color: #ffff;
+                position: absolute;
+                top: 12px;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                border: 0.1px solid #29292a;
+                background-color: #38383d;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                box-shadow: none;
+                z-index: 3;
+            }
+
+            .popup-close:focus {
+                outline: none
+            }
+
+            .popup popup-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .popup .header {
+                width: 100%;
+                padding: 5px 60px;
+            }
+
+            .popup .header h3 {
+                color: #ffffff;
+                text-align: center;
+            }
+
+            h3 {
+                font-size: 17.24137931px;
+            }
+
+            .popup .content {
+                width: 100%;
+                padding: 24px;
+            }
+
+            .input, .input-code {
+                position: relative;
+            }
+
+            .filters .input:not(:last-child) {
+                margin-bottom: 24px;
+            }
+
+            .filters .input .label {
+                font-weight: 700;
+                color: #ffffff;
+                font-size: 14.48275862px;
+                margin-bottom: 12px;
+            }
+
+            .filters .input .segment {
+                display: flex;
+                border: 0.1px solid #29292a;
+                border-radius: 999px;
+            }
+
+            .filters .input .segment input[type=radio] {
+                display: none;
+            }
+
+            input[type=radio]:checked {
+                border-color: #32c075;
+                background-color: #32c075;
+            }
+
+            input[type=radio] {
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+                transition: all .1s linear;
+                border: 2px solid #29292a;
+                border-radius: 50%;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .contenido {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                cursor: pointer;
+                border: 0;
+                outline: 0;
+                display: block;
+                background-color: transparent;
+                -webkit-tap-highlight-color: transparent;
+                margin-bottom: -5px;
+            }
+
+            input:checked + label {
+                background-color: #32c075;
+                color: #ffffff;
+            }
+
+            .filters .input .segment label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-grow: 1;
+                flex-basis: 0;
+                height: 38px;
+                text-align: center;
+                font-size: 14px;
+                font-weight: 700;
+                color: #ffffff;
+                border-radius: 999px;
+            }
+
+            .filters .input .select select {
+                height: 38px;
+            }
+
+            select {
+                height: 44px;
+                border-bottom: 2px solid #29292a;
+                color: #ffffff;
+                font-size: 14.48275862px;
+                margin: 0 auto;
+                display: block;
+                text-align: left;
+                width: 100%;
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+                transition: border .1s linear;
+            }
+
+            select {
+                border: 0.1px solid #29292a;
+                border-radius: 999px;
+                --bg-image-gradient: transparent 50%, #ffffff 50% calc(50% + 1px), transparent calc(50% + 2px);
+                background-image: linear-gradient(45deg, var(--bg-image-gradient)), linear-gradient(-45deg, var(--bg-image-gradient));
+                background-position: right 20px top 50%, right 15px top 50%;
+                background-size: 5px;
+                background-repeat: no-repeat;
+                padding: 0 12px;
+            }
+
+            .popup .footer {
+                width: 100%;
+                padding: 0 24px 24px 24px;
+            }
+
+            .popup .buttons {
+                display: flex;
+                margin: 0 -6px;
+            }
+
+            .popup .buttons .botones {
+                width: 100%;
+                margin: 0 6px;
+            }
+
+            .botones {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                cursor: pointer;
+                border: 0;
+                outline: 0;
+                display: block;
+                background-color: transparent;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .botones-grey {
+                height: 44px;
+                border-radius: 999px;
+                text-align: center;
+                transition: opacity .1s linear;
+                font-size: 14.48275862px;
+                font-weight: 700;
+                background-color: #bebebe;
+                color: #000000;
+            }
+
+            .botones-dark {
+                height: 44px;
+                border-radius: 999px;
+                text-align: center;
+                transition: opacity .1s linear;
+                font-size: 14.48275862px;
+                font-weight: 700;
+                background-color: #29292a;
+                color: #ffffff;
+            }
+
+            #content > .wrapper {
+                position: relative;
+            }
+
+            .wrapper {
+                height: 88vh;
+                overflow-y: scroll;
+                padding: 12px 12px 0 12px;
+            }
+
+            .player-list {
+                list-style: none;
+            }
+
+            .list-sale {
+                margin: 12px;
+                border-radius: 25px;
+                background-color: #38383d;
+                list-style: none;
+            }
+
+            .lista:not(:last-child) {
+                border-bottom: 1px solid #29292a;
+            }
+
+            .player-row {
+                margin-top: -10px;
+                display: flex;
+                align-items: center;
+                padding: 12px;
+            }
+
+            .player-row .player {
+                display: flex;
+                flex-grow: 1;
+                align-items: center;
+                justify-content: flex-start;
+                color: #ffff;
+            }
+
+            .btn {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                cursor: pointer;
+                border: 0;
+                outline: 0;
+                display: block;
+                background-color: transparent;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            a.btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .player-row .player .icons {
+                width: auto;
+                margin-right: 8px;
+            }
+
+            .icons {
+                width: auto;
+                margin-right: 8px;
+            }
+
+
+            .icons img {
+                display: flex;
+            }
+
+
+            .icons > * {
+                margin: 0 auto;
+            }
+
+            .team-logo {
+                vertical-align: middle;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                object-fit: contain;
+            }
+
+            [class^=pos-] {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 700;
+                font-size: 9.65517241px;
+                border-radius: 6px;
+                width: 24px;
+                font-style: normal;
+                color: #fff;
+                position: relative;
+                flex-shrink: 0;
+            }
+
+            .pos-4 {
+                background-color: #db1447;
+            }
+
+            .pos-3 {
+                background-color: #21a46a;
+            }
+
+            .pos-2 {
+                background-color: #1b18ca;
+            }
+
+            .pos-1 {
+                background-color: #f6c102;
+            }
+
+            .points {
+                background-color: #000000;
+                border-radius: 6px;
+                color: #ffff;
+                min-width: 24px;
+                height: 20px;
+                font-size: 9.65517241px;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .points {
+                margin-top: 5px;
+            }
+
+            .player-pic {
+                background-color: #29292a;
+                border-radius: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                width: 57.14285714px;
+                height: 64.28571429px;
+                object-fit: contain;
+            }
+
+            .qd-player {
+                -webkit-touch-callout: none;
+            }
+
+            .player-pic img {
+                display: block;
+                width: 60.85714286px;
+                height: 60.85714286px;
+            }
+
+            .info {
+                flex-grow: 1;
+                margin-left: 8px;
+            }
+
+            .name {
+                font-weight: 700;
+                font-size: 15.17241379px;
+                display: flex;
+                align-items: center;
+            }
+
+            .underName:not(:last-child) {
+                margin-bottom: 6px;
+            }
+
+            .underName {
+                font-size: 12.4137931px;
+                color: #ffff;
+                margin-top: 6px;
+                display: flex;
+                align-items: center;
+            }
+
+            .value-arrow {
+                font-size: 15.17241379px;
+                margin-right: 2px;
+                line-height: .1;
+                display: inline-block;
+                font-weight: 700;
+                font-family: monospace;
+            }
+
+            .streak-rival {
+                display: flex;
+            }
+
+            .avg {
+                margin-right: 6px;
+                background-color: #29292a;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 400;
+                font-size: 9.65517241px;
+                border-radius: 3px;
+                padding: 0 4px;
+                height: 17.85714286px;
+            }
+
+            .avg {
+                margin-left: 0
+            }
+
+            .streak {
+                margin-right: 6px;
+            }
+
+            .streak {
+                display: inline-flex;
+            }
+
+            .streak span {
+                color: #fff;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 400;
+                font-size: 9.65517241px;
+                border-radius: 3px;
+                width: 17.85714286px;
+                height: 17.85714286px;
+                margin-right: 3px;
+            }
+
+            .bg-4 {
+                background-color: #0427a4 !important;
+            }
+
+            .bg-3 {
+                background-color: #32c075 !important;
+            }
+
+            .bg-2 {
+                background-color: #ffd439 !important;
+            }
+
+            .bg-1 {
+                background-color: #e1362b !important;
+            }
+
+            .bg-0 {
+                background-color: #29292a !important;
+            }
+
+            .btn-favorite {
+                border-radius: 50%;
+                width: 37.14285714px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #boton_favorito {
+                box-shadow: none;
+            }
+
+            a.btn-round {
+                text-decoration: none;
+            }
+
+            .btn-round:hover {
+                background-color: #515154;
+            }
+
+            #btn-order:hover {
+                background-color: #515154;
+            }
+
+            .btnplayers:hover {
+                background-color: #515154;
+            }
+
+            .botones:hover {
+                background-color: #515154;
+            }
+
+            .go-back:hover {
+                background-color: #515154;
+            }
+
+            select:hover {
+                background-color: #515154;
+            }
+        </style>
+    {% endblock %}
+
+</head>
+
+<body>
+{% block content %}
+
+    <!--! Alertas SweetAlert 2-->
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'info' %}
+                <script>
+                    notificacionSwAl('',
+                        '{{ message }}',
+                        'info',
+                        'Aceptar', 'info')
+                </script>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sw">
+                <div class="sw-top">
+                    <div class="sw-top-letf">
+                        <a class="btn-round"
+                           href="{% url 'pagina_principal_comunidad' id_comunidad=comunidad.id %}"><</a>
+                    </div>
+                    <div class="sw-top-center">
+                        <input id="buscador" class="sw-top-search" type="text" name="search"
+                               placeholder="🔍 Buscar jugador"
+                               autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" value>
+
+                    </div>
+                    <div class="sw-top-right">
+                        <a class="btn-round" id="enlace-favoritos" href="{% url 'filtrar_favoritos' %}">
+                            <img class="team-logo" id="favoritos" width="50" height="35"
+                                 src="{% static 'imagenes/favoritos/estrella_rellena.png' %}"
+                                 loading="lazy">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sw-top-bottom">
+
+                    <div class="buttons buttons-players row">
+                        <form method="get" action="{% url 'lista_jugadores_comunidad' %}" class="col-md-6">
+                            {% csrf_token %}
+                            <select id="btn-order" name="orden">
+                                <option value="0" type="submit" {% if orden_actual == 0 %}selected{% endif %}>Orden:
+                                    Puntos
+                                </option>
+                                <option value="1" type="submit" {% if orden_actual == 1 %}selected{% endif %}>Orden:
+                                    Media
+                                </option>
+                                <option value="2" type="submit" {% if orden_actual == 2 %}selected{% endif %}>Orden:
+                                    Valor
+                                </option>
+                            </select>
+                        </form>
+
+
+                        <button id="abrir-modal-filtrar-jugadores" class="btnplayers btn-border"
+                                data-popup="players-filter col-md-6">
+                            Filtrar
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="sw-topbar-placeholder"></div>
+
+                <div class="wrapper">
+                    <form>
+                        <div id="list-on-sale" class="player-list list-sale">
+                            {% csrf_token %}
+                            {% for jugador , jornadas in jornadas_jugadores.items %}
+                                <div class="lista">
+                                    <div class="player-row">
+                                        <a class="btn btn-sw-link player">
+                                            <div class="icons">
+                                                <img class="team-logo" width="20" height="20"
+                                                     src="{{ jugador.equipoReal.imagen }}"
+                                                     loading="lazy">
+                                                {% if jugador.posicion == "DL" %}
+                                                    <i class="pos-4">{{ jugador.posicion }}</i>
+                                                {% elif jugador.posicion == "PT" %}
+                                                    <i class="pos-1">{{ jugador.posicion }}</i>
+                                                {% elif jugador.posicion == "DF" %}
+                                                    <i class="pos-2">{{ jugador.posicion }}</i>
+                                                {% elif jugador.posicion == "MC" %}
+                                                    <i class="pos-3">{{ jugador.posicion }}</i>
+                                                {% endif %}
+                                                <div class="points">{{ jugador.puntuacion }}</div>
+                                            </div>
+                                            <div class="player-pic qd-player">
+                                                <img src="{{ jugador.imagen }}"
+                                                     loading="lazy">
+                                            </div>
+                                            <div class="info">
+                                                <div class="name">{{ jugador.nombre }}</div>
+                                                <div class="underName">
+                                                    <span class="value-arrow">💰</span>{{ jugador.valor|intcomma }} €
+                                                </div>
+                                                <div class="streak-rival">
+                                                    <div class="avg">{{ jugador.puntuacion_media }}</div>
+                                                    <div class="streak">
+                                                        <!--! JORNADAS DEL JUGADOR -->
+                                                        {% for jornada in jornadas %}
+
+                                                            <!--! COMPARACION DE LA FECHA PARA COMPROBAR SI LA JORNADA TODAVIA NO SE HA JUGADO -->
+                                                            {% if jornada.fecha|date:"Y-m-d H:i" > fecha_actual|date:"Y-m-d H:i" %}
+
+                                                                {% if jugador.equipoReal.id == jornada.equipo_local.id %}
+                                                                    <img class="team-logo" width="18" height="18"
+                                                                         src="{{ jornada.equipo_visitante.imagen }}"
+                                                                         loading="lazy">
+                                                                {% elif jugador.equipoReal.id == jornada.equipo_visitante.id %}
+                                                                    <img class="team-logo" width="18" height="18"
+                                                                         src="{{ jornada.equipo_local.imagen }}"
+                                                                         loading="lazy">
+                                                                {% endif %}
+
+                                                            {% else %}
+
+                                                                <!--! COMPARACION PARA SABER  -->
+                                                                {% if jornada.puntos >= 10 %}
+                                                                    <span class="bg-4">{{ jornada.puntos }}</span>
+                                                                {% elif jornada.puntos >= 5 %}
+                                                                    <span class="bg-3">{{ jornada.puntos }}</span>
+                                                                {% elif jornada.puntos >= 0 %}
+                                                                    <span class="bg-2">{{ jornada.puntos }}</span>
+                                                                {% elif jornada.puntos < 0 %}
+                                                                    <span class="bg-1">{{ jornada.puntos }}</span>
+                                                                {% elif jornada.puntos is null %}
+                                                                    <span class="bg-0">-</span>
+
+                                                                {% endif %}
+
+                                                            {% endif %}
+
+                                                        {% endfor %}
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        {% if jugador.nombre in favoritos %}
+
+                                            <a class="btn btn-favorite" data-id="id" id="boton_favorito"
+                                               href="{% url 'agregar_favorito' nombre=jugador.nombre %}"
+                                               style="background: none !important;">
+                                                <img class="team-logo" width="50" height="35"
+                                                     src="{% static 'imagenes/favoritos/estrella_rellena.png' %}"
+                                                     loading="lazy">
+                                            </a>
+                                        {% else %}
+                                            <a class="btn btn-favorite" data-id="id" id="boton_favorito"
+                                               href="{% url 'agregar_favorito' nombre=jugador.nombre %}"
+                                               style="background: none !important;">
+                                                <img class="team-logo" width="50" height="35"
+                                                     src="{% static 'imagenes/favoritos/estrella_vacia.png' %}"
+                                                     loading="lazy">
+                                            </a>
+
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--! DIALOGS MODALES -->
+    <dialog id="modal-filtar-jugadores">
+        <div class="popup">
+            <b>
+                <button class="popup-close go-back" id="cerrar-modal-filtrar-jugadores">X</button>
+            </b>
+
+            <div class="popup-content" style="max-height: 843.3px;">
+                <div class="header">
+                    <h3>🌪️Filtrar</h3>
+                </div>
+                <div class="content">
+                    <form id="filters-players" class="filters" method="POST" action="{% url 'filtrar_jugadores' %}">
+                        {% csrf_token %}
+                        <div class="input">
+                            <div class="label">Posición</div>
+                            <div class="segment">
+                                <input type="radio" name="position" value="0" id="posicion-0"
+                                       {% if opciones_seleccionadas.posicion == "0" %}checked{% endif %}>
+                                <label class="contenido" for="posicion-0">Todas</label>
+                                <input type="radio" name="position" value="PT" id="posicion-1"
+                                       {% if opciones_seleccionadas.posicion == "PT" %}checked{% endif %}>
+                                <label class="contenido" for="posicion-1">PT</label>
+                                <input type="radio" name="position" value="DF" id="posicion-3"
+                                       {% if opciones_seleccionadas.posicion == "DF" %}checked{% endif %}>
+                                <label class="contenido" for="posicion-3">DF</label>
+                                <input type="radio" name="position" value="MC" id="posicion-4"
+                                       {% if opciones_seleccionadas.posicion == "MC" %}checked{% endif %}>
+                                <label class="contenido" for="posicion-4">MC</label>
+                                <input type="radio" name="position" value="DL" id="posicion-5"
+                                       {% if opciones_seleccionadas.posicion == "DL" %}checked{% endif %}>
+                                <label class="contenido" for="posicion-5">DL</label>
+                            </div>
+                        </div>
+                        <div class="input">
+                            <div class="label">Valor</div>
+                            <div class="segment">
+                                <input type="radio" name="valor" value="0" id="valor-0"
+                                       {% if opciones_seleccionadas.valor == "0" %}checked{% endif %}>
+                                <label class="contenido" for="valor-0">Todos</label>
+                                <input type="radio" name="valor" value="1" id="valor-1"
+                                       {% if opciones_seleccionadas.valor == "1" %}checked{% endif %}>
+                                <label class="contenido" for="valor-1">0-1M</label>
+                                <input type="radio" name="valor" value="2" id="valor-2"
+                                       {% if opciones_seleccionadas.valor == "2" %}checked{% endif %}>
+                                <label class="contenido" for="valor-2">1-5M</label>
+                                <input type="radio" name="valor" value="3" id="valor-3"
+                                       {% if opciones_seleccionadas.valor == "3" %}checked{% endif %}>
+                                <label class="contenido" for="valor-3">5-10M</label>
+                                <input type="radio" name="valor" value="4" id="valor-4"
+                                       {% if opciones_seleccionadas.valor == "4" %}checked{% endif %}>
+                                <label class="contenido" for="valor-4">+10M</label>
+                            </div>
+                        </div>
+                        <div class="input">
+                            <div class="label">Equipo</div>
+                            <div class="select">
+                                <select name="equipo">
+                                    <option value="0" {% if opciones_seleccionadas.equipo == "0" %}selected{% endif %}>
+                                        Todos
+                                    </option>
+                                    {% for equipo in equipos %}
+                                        <option value="{{ equipo.nombre }}"
+                                                {% if opciones_seleccionadas.equipo == equipo.nombre %}selected{% endif %}>{{ equipo.nombre }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input">
+                            <div class="label">Disponibilidad</div>
+                            <div class="select">
+                                <select name="libre">
+                                    <option value="0"
+                                            {% if opciones_seleccionadas.disponibilidad == "0" %}selected{% endif %}>
+                                        Todos
+                                    </option>
+                                    <option value="1"
+                                            {% if opciones_seleccionadas.disponibilidad == "1" %}selected{% endif %}>
+                                        Libres
+                                    </option>
+                                    <option value="2"
+                                            {% if opciones_seleccionadas.disponibilidad == "2" %}selected{% endif %}>No
+                                        libres
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="footer">
+                            <div class="buttons">
+                                <button type="submit" id="btn-filters-players-reset" name="resetear" class="botones botones-grey">
+                                    Resetear Filtros
+                                </button>
+                                <button type="submit" id="btn-filters-players-aplicar" name="filtrar" class="botones botones-dark">
+                                    Aplicar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </dialog>
+{% endblock %}
+
+{% block script %}
+
+    <!--! SCRIPT PARA EL BUSCADOR -->
+    <script>
+        $(document).ready(function () {
+            $('#buscador').on('input', function () {
+                var query = $(this).val().toLowerCase(); // Obtiene el valor del campo de entrada y lo convierte a minúsculas
+
+                $('.lista').each(function () {
+                    var nombreJugador = $(this).text().toLowerCase(); // Obtiene el nombre del jugador en minúsculas
+
+                    // Comprueba si el nombre del jugador coincide con la consulta de búsqueda
+                    if (nombreJugador.includes(query)) {
+                        $(this).show(); // Muestra el elemento si coincide
+                    } else {
+                        $(this).hide(); // Oculta el elemento si no coincide
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!--! SCRIPT PARA CHEQUEAR SI EL USUARIO ESTÁ EN LA PESTAÑA DE FAVORITOS -->
+    <script>
+        // Verifica la URL actual de la página
+        if (window.location.pathname === '/comunidades/jugadores/favoritos') {
+            // Cambia el src de la imagen
+            document.getElementById('favoritos').src = '{% static 'imagenes/favoritos/estrella_vacia.png' %}';
+
+            // Cambia el enlace del campo <a>
+            document.getElementById('enlace-favoritos').href = '/comunidades/jugadores/';
+        }
+
+
+    </script>
+
+    <!--! SCRIPT PARA ENVIAR EL CAMBIO DE ORDEN DEL LISTADO DE JUGADORES -->
+    <script>
+        //? Obtener el elemento <select> y agregar un evento de cambio
+        const selectOrder = document.getElementById('btn-order');
+        selectOrder.addEventListener('change', function () {
+            //? Enviar el formulario cuando se seleccione una opción
+            this.form.submit();
+        });
+
+
+    </script>
+
+{% endblock %}
+</body>

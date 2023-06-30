@@ -1,0 +1,404 @@
+{% extends 'main.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block style %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+            body {
+                background-color: #29292a;
+                font-family: 'Poppins', sans-serif;
+                color: #ffff;
+            }
+
+            .sw {
+                width: 100%;
+                color: #ffff;
+                transition: box-shadow .1s linear;
+                position: fixed;
+                top: 0;
+                flex-wrap: wrap;
+            }
+
+            .sw .sw-topbar {
+                background-color: #38383d;
+                color: #ffff;
+                width: 100%;
+                transition: box-shadow .1s linear;
+                position: fixed;
+                top: 0;
+                flex-wrap: wrap;
+                z-index: 9999;
+            }
+
+            .sw .sw-top {
+                background-color: #38383d;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 12px;
+            }
+
+            .sw-top-letf {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw .btn-round {
+                border: 0.1px solid #29292a;
+                border-radius: 50%;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 25px;
+                color: #ffff;
+            }
+
+            a.btn-round {
+                text-decoration: none;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .sw-top-center {
+                flex-grow: 1;
+                margin: 0 12px;
+                overflow: hidden;
+            }
+
+            .sw-title {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                font-size: 18px;
+                font-weight: 700;
+                text-align: center;
+            }
+
+            .sw-top-right {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw-topbar-placeholder {
+                height: 3px;
+            }
+
+            .sw-settings {
+                padding-bottom: 12px;
+            }
+
+            .wrapper {
+                max-width: 600px;
+                margin: auto;
+            }
+
+            .sw-settings ul {
+                list-style: none;
+                margin: 12px;
+            }
+
+            .box {
+                background-color: #38383d;
+                margin-bottom: 24px;
+                border-radius: 12px;
+            }
+
+            .sw-settings ul li {
+                margin-left: -40px;
+                padding: 12px;
+                position: relative;
+            }
+
+            .pic {
+                margin: auto;
+            }
+
+            .pic {
+                width: 70px;
+                height: 70px;
+                border-radius: 50px;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
+                z-index: 1;
+                color: #fff;
+                font-size: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .title {
+                color: #fff;
+                font-size: 14px;
+            }
+
+            .subtitle {
+                color: #f8f9faa1;
+                font-size: 12px;
+            }
+
+            .buttons {
+                width: 50%;
+                display: flex;
+                margin: 12px -6px 0 -6px;
+            }
+
+            .buttons .btn {
+                flex-grow: 1;
+                flex-basis: 0;
+                margin: 0 6px;
+            }
+
+            .btn-grey {
+                height: 40px;
+                border-radius: 999px;
+                text-align: center;
+                transition: opacity .1s linear;
+                overflow: hidden;
+                font-size: 14.80px;
+                font-weight: 700;
+                background-color: #000000;
+                color: #fff;
+                width: 50%;
+            }
+
+            .btn-grey:hover {
+                color: #ffff;
+                background-color: #515154;
+            }
+
+            .center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            a.btn {
+                outline: none;
+                text-decoration: none;
+            }
+
+            .btn {
+                outline: none;
+                text-decoration: none;
+            }
+
+            .btn-linkl {
+                text-align: left;
+                width: 100%;
+            }
+
+            .btn-grey {
+                outline: none;
+                text-decoration: none;
+            }
+
+            .btn:focus,
+            .btn:active {
+                outline: none;
+                box-shadow: none;
+            }
+
+            a:hover {
+                text-decoration: none;
+            }
+
+            .red {
+                color: #e13632;
+            }
+        </style>
+    {% endblock %}
+</head>
+
+<body>
+{% block content %}
+
+    <!--! Alertas SweetAlert2 -->
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <script>
+                    notificacionSwAl('¡Cambio Exitoso!',
+                        '{{ message }}',
+                        'success',
+                        'Aceptar', 'exitoso')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </script>
+            {% elif message.tags == 'error' %}
+                <script>
+                    notificacionSwAl('Error al Guardar',
+                        '{{ message }}',
+                        'error',
+                        'Aceptar')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sw">
+                <div class="sw-top">
+                    <div class="sw-top-letf">
+                        <a class="btn-round"
+                           href="{% url 'pagina_principal_comunidad' id_comunidad=comunidad.id %}"><</a>
+                    </div>
+                    <div class="sw-top-center">
+                        <div class="sw-title">Preferencias de usuario</div>
+                    </div>
+                    <div class="sw-top-right"></div>
+                </div>
+                <div class="sw-topbar-placeholder"></div>
+                <div class="wrapper sw-settings">
+                    <ul class="box">
+                        <li class="avatar">
+                            {% if perfil.profile_image %}
+                                <img class="pic" src="{{ perfil.profile_image.url }}"
+                                     alt="User-Profile-Image">
+                            {% endif %}
+                            <div class="title">{{ request.user.username }}</div>
+                            <div class="subtitle">Registrado el {{ request.user.date_joined }}</div>
+                            <div class="center">
+                                <div class="buttons">
+                                    <a href="{% url 'editar_perfil' %}" class="btn btn-grey btn-pic-delete">✏️ Editar
+                                        Perfil</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="box">
+                        <li class="btn btn-linkl">
+                            <a href="{% url 'logout' %}">
+                                <div class="title">Cerrar sesión</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="box">
+                        <li class="btn btn-linkl">
+                            <form id="formularioEliminar" action="{% url 'eliminar_perfil' %}"
+                                  method="post">
+                                {% csrf_token %}
+                                <div id="eliminar-btn" type="submit">
+                                    <div class="title red">Eliminar cuenta para siempre</div>
+                                    <div class="subtitle">Perderás todas tus ligas. Esta acción es irreversible.</div>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        document.getElementById("eliminar-btn").addEventListener("click", function (event) {
+            event.preventDefault(); // Previene el envío del formulario
+            notificacionSwAl('¿Está seguro?',
+                'Esto eliminará permanentemente este usuario',
+                'warning',
+                'Eliminar', 'eliminar')
+        });
+
+
+    </script>
+{% endblock %}
+</body>

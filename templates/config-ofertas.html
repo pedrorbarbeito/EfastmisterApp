@@ -1,0 +1,1057 @@
+{% extends 'main.html' %}
+{% load static %}
+<head>
+    {% block style %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+            body {
+                background-color: #29292a;
+                font-family: 'Poppins', sans-serif;
+                color: #ffff;
+            }
+
+
+            form {
+                border-radius: 20px;
+                background-color: transparent !important;
+            }
+
+            h4 {
+                padding-top: 15px;
+                font-size: 21px !important;
+                background: #38383d;
+            }
+
+            @media only screen and (max-width: 600px) {
+                form {
+                    width: 100% !important;
+                }
+            }
+
+            .button {
+                display: flex;
+                justify-content: center;
+            }
+
+            .btn:focus {
+                box-shadow: none;
+            }
+
+            .btn.button {
+                width: 100%; /* Ajusta el ancho del botón según tus necesidades */
+                max-width: 400px; /* Puedes establecer un ancho máximo si lo deseas */
+                min-width: 400px;
+                background-color: #38383d;
+                padding: 20px;
+                border-radius: 10px;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+            }
+
+            .button h6 {
+                margin: 0;
+                font-size: 16px;
+            }
+
+            .button b {
+                font-size: 14px;
+                color: #919aa3;
+            }
+
+            .button a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .button i {
+                background-color: #38383d;
+            }
+
+            .divcentro {
+                display: flex;
+                justify-content: center;
+            }
+
+            .sw {
+                width: 100%;
+                background-color: #38383d;
+                color: #ffff;
+                transition: box-shadow .1s linear;
+                position: fixed;
+                top: 0;
+                flex-wrap: wrap;
+            }
+
+            .sw .sw-top {
+                background-color: #38383d;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 12px;
+            }
+
+            .sw-top-letf {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw-top-right {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw .sw-top-center {
+                background-color: #38383d;
+                flex-grow: 1;
+                margin: 0 12px;
+                overflow: hidden;
+            }
+
+            .sw .sw-title {
+                background-color: #38383d;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                font-size: 25px;
+                font-weight: 700;
+                text-align: center;
+            }
+
+            .btn-round:hover {
+                background-color: #515154;
+            }
+
+            .btn:hover {
+                background-color: #515154;
+            }
+
+            .sw .btn-round {
+                border: 0.1px solid #29292a;
+                border-radius: 50%;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 25px;
+                color: #ffff;
+            }
+
+            .mx-auto {
+                margin-right: auto !important;
+                margin-left: auto !important;
+                margin-top: 65px;
+            }
+
+            /* MODALES */
+            dialog::backdrop {
+                background-color: rgba(0, 0, 0, .55);
+                backdrop-filter: blur(5px);
+            }
+
+            dialog {
+                max-width: 90%;
+                border-radius: 10px;
+                color: transparent;
+                background-color: #38383d;
+                font-family: 'Poppins', sans-serif;
+                max-height: 90%;
+            }
+
+            @media (min-width: 600px) {
+                dialog {
+                    min-width: 400px;
+                    max-height: 400px;
+                    min-height: 215px;
+                    margin-top: 300px;
+                    max-width: 430px;
+                    border-radius: 12px;
+                    align-self: center;
+                }
+            }
+
+            .popoup {
+                width: 100%;
+                border-radius: 12px 12px 0 0;
+                max-height: 90%;
+            }
+
+            .popup-close {
+                right: 12px;
+            }
+
+            .popup-close {
+                color: #ffff;
+                position: absolute;
+                top: 12px;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                border: 0.1px solid #29292a;
+                background-color: #38383d;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                box-shadow: none;
+                z-index: 3;
+
+            }
+
+            .popup-close:focus {
+                outline: none
+            }
+
+            .popup-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .content {
+                width: 100%;
+                padding: 8px;
+                overflow-y: auto;
+            }
+
+            .header {
+                width: 100%;
+                padding: 4px;
+                align-items: center;
+            }
+
+            .header h3 {
+                font-size: 17.24137931px;
+                color: #ffffff;
+                text-align: center;
+                align-items: center;
+            }
+
+            .input {
+                margin-top: -30px;
+            }
+
+            input[type=text], select, input[type=file] {
+                appearance: none;
+                outline: 0;
+                border: 0;
+                background-color: transparent;
+                user-select: auto;
+                height: 44px;
+                border-bottom: 2px solid #ebedf169;
+                color: #ffffff;
+                font-size: 14.48275862px;
+                margin: 0 auto;
+                display: block;
+                text-align: left;
+                width: 100%;
+                cursor: pointer;
+                transition: border .1s linear;
+            }
+
+            .footer {
+                width: 100%;
+                padding: 0 24px 24px 24px;
+            }
+
+            .buttons {
+                display: flex;
+                margin: 0 -6px;
+            }
+
+            .boton-guardar {
+                height: 44px;
+                border: #212529;
+                border-radius: 999px;
+
+                text-align: center;
+                transition: opacity .1s linear;
+                overflow: hidden;
+                font-size: 14.48275862px;
+                font-weight: 700;
+                background-color: #212529;
+                color: #ffffff;
+            }
+
+            .buttons .boton-guardar {
+                width: 100%;
+                margin: 0 6px;
+            }
+
+            .boton-guardar:hover {
+                background-color: #515154;
+            }
+
+            .boton-guardar2:hover {
+                background-color: #515154;
+            }
+
+            .go-back:hover {
+                background-color: #515154;
+            }
+
+            .boton-guardar2 {
+                height: 44px;
+                border: #212529;
+                border-radius: 999px;
+
+                text-align: center;
+                transition: opacity .1s linear;
+                overflow: hidden;
+                font-size: 14.48275862px;
+                font-weight: 700;
+                background-color: #212529;
+                color: #ffffff;
+            }
+
+            .buttons .boton-guardar2 {
+                width: 100%;
+                margin: 0 6px;
+                margin-top: 30px;
+            }
+
+            .footer {
+                width: 100%;
+                padding: 0 24px 10px 24px;
+            }
+
+            .settings-options {
+                list-style: none;
+            }
+
+            .settings-options li {
+                display: flex;
+                align-items: center;
+                color: #ffffff;
+            }
+
+            .settings-options li input {
+                margin-right: 12px;
+                flex-shrink: 0;
+            }
+
+            input[type=radio] {
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+                transition: all .1s linear;
+                border: 2px solid #ebedf1;
+                border-radius: 50%;
+            }
+
+            input {
+                appearance: none;
+                outline: 0;
+                border: 0;
+                background-color: transparent;
+                user-select: auto;
+            }
+
+            .settings-options li label {
+                flex-grow: 1;
+            }
+
+            input[type=radio]:checked {
+                border-color: #32c075;
+                background-color: #32c075;
+                box-shadow: inset 0 0 0 2px #38383d;
+            }
+
+            /* ESTILO PARA EL INPUT NUMERO DE MIEMBROS */
+
+            .number-input {
+                margin-top: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .number-input button {
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                margin: 0;
+                border: none;
+                font-size: 1.5rem;
+                background-color: transparent;
+                color: #fff;
+            }
+
+            .number-input button:hover {
+                background-color: #212529;
+            }
+
+            .number-input input {
+                border: transparent;
+                background-color: transparent;
+            }
+
+            input[type=number] {
+                height: 44px;
+                border-bottom: 2px solid #ebedf169;
+                color: #ffff;
+                font-size: 14.48275862px;
+                margin: 0 auto;
+                display: block;
+                text-align: left;
+                width: 100%;
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+                transition: border .1s linear;
+            }
+
+            .number-input input[type=number]:focus {
+                outline: none;
+            }
+
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            input[type=number] {
+                -moz-appearance: textfield;
+            }
+
+
+        </style>
+    {% endblock %}
+
+</head>
+
+<body>
+{% block content %}
+
+    <!--! Alertas SweetAlert 2-->
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <script>
+                    notificacionSwAl('¡Actualización Guardada!',
+                        '{{ message }}',
+                        'success',
+                        'Aceptar', 'exitoso')
+
+
+                </script>
+            {% elif message.tags == 'error' %}
+                <script>
+                    notificacionSwAl('¡Actualización Fallida!',
+                        '{{ message }}',
+                        'error',
+                        'Aceptar')
+
+
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sw">
+                <div class="sw-top">
+                    <div class="sw-top-letf">
+                        <a class="btn-round" href="{% url 'configuracion_comunidad' %}"
+                           style="text-decoration: none"><</a>
+                    </div>
+                    <div class="sw-top-center">
+                        <div class="sw-title">📉📈 Ofertas, pujas y cláusulas</div>
+                    </div>
+                    <div class="sw-top-right"></div>
+                </div>
+            </div>
+            <form class="mx-auto">
+                <h6 class="mt-4">💼💰 Ofertas</h6>
+                <div class="mb-3 mt-3 divcentro" id="abrir-modal-ofertas">
+                    <a class="btn button">
+                        <h6>✔💰 Al aceptar una oferta, transferir jugador y saldo</h6>
+                        {% if gestion_comunidad.hacer_oferta == 0 %}
+                            <b class="mt-1">De forma inmediata </b>
+                        {% elif gestion_comunidad.hacer_oferta == 1 %}
+                            <b class="mt-1">En el siguiente ciclo de mercado </b>
+                        {% endif %}
+                    </a>
+                </div>
+                <h6 class="mt-4">🛒👥‍ Compras entre miembros</h6>
+                <div class="mb-3 mt-4 divcentro" id="abrir-modal-compras-miembros">
+                    <a class="btn button">
+                        <h6>💶📉 Permitir ofertar por debajo del valor de mercado</h6>
+                        {% if gestion_comunidad.oferta_bajo_mercado == 1 %}
+                            <b class="mt-1">Si</b>
+                        {% elif gestion_comunidad.oferta_bajo_mercado == 0 %}
+                            <b class="mt-1">No</b>
+                        {% endif %}
+
+                    </a>
+                </div>
+                <h6 class="mt-4">💰⛓️ Cláusulas de rescisión</h6>
+                <div class="mb-3 mt-4 divcentro" id="abrir-modal-clausulas-recesion">
+                    <a class="btn button">
+                        <h6>✓⛓️ Permitir el uso de cláusulas de rescisión</h6>
+                        {% if gestion_comunidad.chupinazo == 1 %}
+                            <b class="mt-1">Si</b>
+                        {% elif gestion_comunidad.chupinazo == 0 %}
+                            <b class="mt-1">No</b>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="mb-3 divcentro" id="abrir-modal-clausulas-fichado">
+                    <a class="btn button">
+                        <h6>🚫⏰ Impedir fichar por cláusula a recién fichados durante las primeras</h6>
+                        {% if gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 0 %}
+                            <b class="mt-1">Desactivado</b>
+                        {% elif gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 24 %}
+                            <b class="mt-1">24 horas</b>
+                        {% elif gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 72 %}
+                            <b class="mt-1">72 horas</b>
+                        {% elif gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 168 %}
+                            <b class="mt-1">7 días</b>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="mb-3 divcentro" id="abrir-modal-clausulas-impedir">
+                    <a class="btn button">
+                        <h6>🚫💰 Impedir fichar por clausula a más de</h6>
+                        {% if gestion_comunidad.maximo_jugadores_horas_chupinazo == 0 %}
+                            <b class="mt-1">Desactivado</b>
+                        {% elif gestion_comunidad.maximo_jugadores_horas_chupinazo == 1 %}
+                            <b class="mt-1">Un jugador por día</b>
+                        {% elif gestion_comunidad.maximo_jugadores_horas_chupinazo == 2 %}
+                            <b class="mt-1">Tres jugadores por día</b>
+                        {% elif gestion_comunidad.maximo_jugadores_horas_chupinazo == 3 %}
+                            <b class="mt-1">Un jugador por semana</b>
+                        {% elif gestion_comunidad.maximo_jugadores_horas_chupinazo == 4 %}
+                            <b class="mt-1">Tres jugadores por semana</b>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="mb-3 divcentro" id="abrir-modal-clausulas-jornadas">
+                    <a class="btn button">
+                        <h6>⏰🔢 Antes de la jornada, durante las</h6>
+                        {% if gestion_comunidad.horas_antes_jornada_chupinazo == 0 %}
+                            <b class="mt-1">Desactivado</b>
+                        {% elif gestion_comunidad.horas_antes_jornada_chupinazo == 24 %}
+                            <b class="mt-1">24 horas previas al inicio</b>
+                        {% elif gestion_comunidad.horas_antes_jornada_chupinazo == 48 %}
+                            <b class="mt-1">48 horas previas al inicio</b>
+                        {% elif gestion_comunidad.horas_antes_jornada_chupinazo == 72 %}
+                            <b class="mt-1">72 horas previas al inicio</b>
+                        {% endif %}
+                    </a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!--! DIALOGS MODALES -->
+    {% if comunidad.administrador.id == request.user.id %}
+        <dialog id="modal-ofertas">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-ofertas">X</button>
+                </b>
+                <div class="header">
+                    <h3>✔💰 Al aceptar una oferta</h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="hacer_oferta" id="hacer_oferta" value="0"
+                                       {% if gestion_comunidad.hacer_oferta == 0 %}checked{% endif %}>
+                                <label class="mt-2">De forma inmediata</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="hacer_oferta" id="hacer_oferta" value="1"
+                                       {% if gestion_comunidad.hacer_oferta == 1 %}checked{% endif %}>
+                                <label class="mt-2">En el siguiente ciclo de mercado</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-compras-miembros">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-compras-miembros">X</button>
+                </b>
+                <div class="header">
+                    <h3>💶📉 Permitir ofertas por debajo</h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="oferta_bajo_mercado" id="oferta_bajo_mercado" value="1"
+                                       {% if gestion_comunidad.oferta_bajo_mercado == 1 %}checked{% endif %}>
+                                <label class="mt-2">Sí</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="oferta_bajo_mercado" id="oferta_bajo_mercado" value="0"
+                                       {% if gestion_comunidad.oferta_bajo_mercado == 0 %}checked{% endif %}>
+                                <label class="mt-2">No</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-clausulas-recesion">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-clausulas-recesion">X</button>
+                </b>
+                <div class="header">
+                    <h3>✓⛓️ Permitir cláusulas </h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="chupinazo" id="chupinazo" value="1"
+                                       {% if gestion_comunidad.chupinazo == 1 %}checked{% endif %}>
+                                <label class="mt-2">Sí</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="chupinazo" id="chupinazo" value="0"
+                                       {% if gestion_comunidad.chupinazo == 0 %}checked{% endif %}>
+                                <label class="mt-2">No</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-clausulas-fichado">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-clausulas-fichado">X</button>
+                </b>
+                <div class="header">
+                    <h3>🚫⏰ Impedir fichar durante</h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="horas_antes_de_chupinazo_recien_fichados"
+                                       id="horas_antes_de_chupinazo_recien_fichados" value="0"
+                                       {% if gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 0 %}checked{% endif %}>
+                                <label class="mt-2">Desactivado</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_de_chupinazo_recien_fichados"
+                                       id="horas_antes_de_chupinazo_recien_fichados" value="24"
+                                       {% if gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 24 %}checked{% endif %}>
+                                <label class="mt-2">24 horas</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_de_chupinazo_recien_fichados"
+                                       id="horas_antes_de_chupinazo_recien_fichados" value="72"
+                                       {% if gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 72 %}checked{% endif %}>
+                                <label class="mt-2">72 horas</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_de_chupinazo_recien_fichados"
+                                       id="horas_antes_de_chupinazo_recien_fichados" value="168"
+                                       {% if gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 168 %}checked{% endif %}>
+                                <label class="mt-2">7 días</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-clausulas-impedir">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-clausulas-impedir">X</button>
+                </b>
+                <div class="header">
+                    <h3 class="mr-4">🚫💰Impedir fichar por clausula a</h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="maximo_jugadores_horas_chupinazo"
+                                       id="maximo_jugadores_horas_chupinazo" value="0"
+                                       {% if gestion_comunidad.maximo_jugadores_horas_chupinazo == 0 %}checked{% endif %}>
+                                <label class="mt-2">Desactivado</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="maximo_jugadores_horas_chupinazo"
+                                       id="maximo_jugadores_horas_chupinazo" value="1"
+                                       {% if gestion_comunidad.maximo_jugadores_horas_chupinazo == 1 %}checked{% endif %}>
+                                <label class="mt-2">Un jugador por día</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="maximo_jugadores_horas_chupinazo"
+                                       id="maximo_jugadores_horas_chupinazo" value="2"
+                                       {% if gestion_comunidad.maximo_jugadores_horas_chupinazo == 2 %}checked{% endif %}>
+                                <label class="mt-2">Tres jugadores por día</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="maximo_jugadores_horas_chupinazo"
+                                       id="maximo_jugadores_horas_chupinazo" value="3"
+                                       {% if gestion_comunidad.maximo_jugadores_horas_chupinazo == 3 %}checked{% endif %}>
+                                <label class="mt-2">Un jugador por semana</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="maximo_jugadores_horas_chupinazo"
+                                       id="maximo_jugadores_horas_chupinazo" value="4"
+                                       {% if gestion_comunidad.maximo_jugadores_horas_chupinazo == 4 %}checked{% endif %}>
+                                <label class="mt-2">Tres jugadores por semana</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-clausulas-jornadas">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-clausulas-jornadas">X</button>
+                </b>
+                <div class="header">
+                    <h3 class="mr-4">⏰🔢 Antes de la jornada, durante </h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="horas_antes_jornada_chupinazo"
+                                       id="horas_antes_jornada_chupinazo"
+                                       value="0"
+                                       {% if gestion_comunidad.horas_antes_jornada_chupinazo == 0 %}checked{% endif %}>
+                                <label class="mt-2">Desactivado</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_jornada_chupinazo"
+                                       id="horas_antes_jornada_chupinazo"
+                                       value="24"
+                                       {% if gestion_comunidad.horas_antes_jornada_chupinazo == 24 %}checked{% endif %}>
+                                <label class="mt-2">24 horas previas al inicio</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_jornada_chupinazo"
+                                       id="horas_antes_jornada_chupinazo"
+                                       value="48"
+                                       {% if gestion_comunidad.horas_antes_jornada_chupinazo == 48 %}checked{% endif %}>
+                                <label class="mt-2">48 horas previas al inicio</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_jornada_chupinazo"
+                                       id="horas_antes_jornada_chupinazo"
+                                       value="72"
+                                       {% if gestion_comunidad.horas_antes_jornada_chupinazo == 72 %}checked{% endif %}>
+                                <label class="mt-2">72 horas</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+    {% else %}
+        <dialog id="modal-ofertas">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-ofertas">X</button>
+                </b>
+                <div class="header">
+                    <h3>✔💰 Al aceptar una oferta</h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="hacer_oferta" id="hacer_oferta" value="0"
+                                       {% if gestion_comunidad.hacer_oferta == 0 %}checked{% endif %} disabled>
+                                <label class="mt-2">De forma inmediata</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="hacer_oferta" id="hacer_oferta" value="1"
+                                       {% if gestion_comunidad.hacer_oferta == 1 %}checked{% endif %} disabled>
+                                <label class="mt-2">En el siguiente ciclo de mercado</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar" disabled>Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-compras-miembros">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-compras-miembros">X</button>
+                </b>
+                <div class="header">
+                    <h3>💶📉 Permitir ofertas por debajo</h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="oferta_bajo_mercado" id="oferta_bajo_mercado" value="1"
+                                       {% if gestion_comunidad.oferta_bajo_mercado == 1 %}checked{% endif %} disabled>
+                                <label class="mt-2">Sí</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="oferta_bajo_mercado" id="oferta_bajo_mercado" value="0"
+                                       {% if gestion_comunidad.oferta_bajo_mercado == 0 %}checked{% endif %} disabled>
+                                <label class="mt-2">No</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar" disabled>Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-clausulas-recesion">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-clausulas-recesion">X</button>
+                </b>
+                <div class="header">
+                    <h3>✓⛓️ Permitir cláusulas </h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="chupinazo" id="chupinazo" value="1"
+                                       {% if gestion_comunidad.chupinazo == 1 %}checked{% endif %} disabled>
+                                <label class="mt-2">Sí</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="chupinazo" id="chupinazo" value="0"
+                                       {% if gestion_comunidad.chupinazo == 0 %}checked{% endif %} disabled>
+                                <label class="mt-2">No</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar" disabled>Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-clausulas-fichado">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-clausulas-fichado">X</button>
+                </b>
+                <div class="header">
+                    <h3>🚫⏰ Impedir fichar durante</h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="horas_antes_de_chupinazo_recien_fichados"
+                                       id="horas_antes_de_chupinazo_recien_fichados" value="0"
+                                       {% if gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 0 %}checked{% endif %} disabled>
+                                <label class="mt-2">Desactivado</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_de_chupinazo_recien_fichados"
+                                       id="horas_antes_de_chupinazo_recien_fichados" value="24"
+                                       {% if gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 24 %}checked{% endif %} disabled>
+                                <label class="mt-2">24 horas</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_de_chupinazo_recien_fichados"
+                                       id="horas_antes_de_chupinazo_recien_fichados" value="72"
+                                       {% if gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 72 %}checked{% endif %} disabled>
+                                <label class="mt-2">72 horas</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_de_chupinazo_recien_fichados"
+                                       id="horas_antes_de_chupinazo_recien_fichados" value="168"
+                                       {% if gestion_comunidad.horas_antes_de_chupinazo_recien_fichados == 168 %}checked{% endif %} disabled>
+                                <label class="mt-2">7 días</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar" disabled>Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-clausulas-impedir">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-clausulas-impedir">X</button>
+                </b>
+                <div class="header">
+                    <h3 class="mr-4">🚫💰Impedir fichar por clausula a</h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="maximo_jugadores_horas_chupinazo"
+                                       id="maximo_jugadores_horas_chupinazo" value="0"
+                                       {% if gestion_comunidad.maximo_jugadores_horas_chupinazo == 0 %}checked{% endif %} disabled>
+                                <label class="mt-2">Desactivado</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="maximo_jugadores_horas_chupinazo"
+                                       id="maximo_jugadores_horas_chupinazo" value="1"
+                                       {% if gestion_comunidad.maximo_jugadores_horas_chupinazo == 1 %}checked{% endif %} disabled>
+                                <label class="mt-2">Un jugador por día</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="maximo_jugadores_horas_chupinazo"
+                                       id="maximo_jugadores_horas_chupinazo" value="2"
+                                       {% if gestion_comunidad.maximo_jugadores_horas_chupinazo == 2 %}checked{% endif %} disabled>
+                                <label class="mt-2">Tres jugadores por día</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="maximo_jugadores_horas_chupinazo"
+                                       id="maximo_jugadores_horas_chupinazo" value="3"
+                                       {% if gestion_comunidad.maximo_jugadores_horas_chupinazo == 3 %}checked{% endif %} disabled>
+                                <label class="mt-2">Un jugador por semana</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="maximo_jugadores_horas_chupinazo"
+                                       id="maximo_jugadores_horas_chupinazo" value="4"
+                                       {% if gestion_comunidad.maximo_jugadores_horas_chupinazo == 4 %}checked{% endif %} disabled>
+                                <label class="mt-2">Tres jugadores por semana</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar" disabled>Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-clausulas-jornadas">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-clausulas-jornadas">X</button>
+                </b>
+                <div class="header">
+                    <h3 class="mr-4">⏰🔢 Antes de la jornada, durante </h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="horas_antes_jornada_chupinazo"
+                                       id="horas_antes_jornada_chupinazo"
+                                       value="0"
+                                       {% if gestion_comunidad.horas_antes_jornada_chupinazo == 0 %}checked{% endif %} disabled>
+                                <label class="mt-2">Desactivado</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_jornada_chupinazo"
+                                       id="horas_antes_jornada_chupinazo"
+                                       value="24"
+                                       {% if gestion_comunidad.horas_antes_jornada_chupinazo == 24 %}checked{% endif %} disabled>
+                                <label class="mt-2">24 horas previas al inicio</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_jornada_chupinazo"
+                                       id="horas_antes_jornada_chupinazo"
+                                       value="48"
+                                       {% if gestion_comunidad.horas_antes_jornada_chupinazo == 48 %}checked{% endif %} disabled>
+                                <label class="mt-2">48 horas previas al inicio</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="horas_antes_jornada_chupinazo"
+                                       id="horas_antes_jornada_chupinazo"
+                                       value="72"
+                                       {% if gestion_comunidad.horas_antes_jornada_chupinazo == 72 %}checked{% endif %} disabled>
+                                <label class="mt-2">72 horas</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar" disabled>Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+    {% endif %}
+
+{% endblock %}
+</body>

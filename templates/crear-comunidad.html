@@ -1,0 +1,207 @@
+{% extends 'main.html' %}
+{% load static %}
+<head>
+    {% block style %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+            body {
+                background-color: #29292a;
+                font-family: 'Poppins', sans-serif;
+                color: #ffff;
+            }
+
+            .wrapper {
+                max-width: 500px;
+                margin: auto;
+            }
+
+            .topbar {
+                margin-top: -25px;
+                align-items: center;
+                display: flex;
+                min-height: 75px;
+                width: 100%;
+                position: relative;
+            }
+
+            .topbar-logo {
+                flex-grow: 1;
+            }
+
+            .topbar-logo img {
+                height: 200px;
+                display: block;
+                margin: auto;
+            }
+
+            .container--h-spaced {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .container--v-spaced {
+                margin-top: -30px;
+                /*padding-top: 18px;
+                padding-bottom: 18px;*/
+            }
+
+            .cta-text {
+                margin: 24px auto;
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .input:not(:last-child) {
+                margin-bottom: 24px;
+            }
+
+            .input {
+                position: relative;
+            }
+
+            input[type=number], input[type=text], input[type=file] {
+                border: 0;
+                background-color: rgba(248, 249, 250, 0.8);
+                height: 50px;
+                font-size: 16px;
+                text-align: center;
+                width: 100%;
+                border-radius: 999px;
+                padding: 12px;
+                color: #000;
+            }
+
+            input {
+                outline: 0;
+            }
+
+            .buttons--stacked .btn:not(:last-child) {
+                margin-bottom: 12px;
+            }
+
+            .btn--primary {
+                background-color: #000000;
+                color: #ffff;
+            }
+
+            .btn--grey {
+                background-color: #cdcdd0;
+                color: #000000;
+            }
+
+            .btn--capsule2:hover {
+                color: #000;
+                background: #515154;
+            }
+
+            .btn--capsule:hover {
+                color: #ffff;
+                background: #515154;
+            }
+
+            .btn:focus {
+                box-shadow: none;
+            }
+
+            .btn--capsule {
+                color: #fff;
+                border-radius: 999px;
+                height: 50px;
+                font-weight: 700;
+                font-size: 0.95rem;
+                width: 100%;
+            }
+
+            .btn--capsule2 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                color: #000;
+                border-radius: 999px;
+                height: 50px;
+                font-weight: 700;
+                font-size: 0.95rem;
+                width: 100%;
+            }
+
+            .form-check-input[type=checkbox] {
+                transform: scale(1.5);
+            }
+
+            .form-check-input[type=checkbox]:checked {
+                background-color: blue;
+                color: white;
+            }
+        </style>
+    {% endblock %}
+</head>
+
+<body>
+{% block content %}
+    <div class="wrapper">
+        <div class="topbar">
+            <div class="topbar-logo">
+                <img src="https://i.postimg.cc/76tMLTs4/logo.png">
+            </div>
+        </div>
+        <div class="container container--v-spaced container--h-spaced">
+            <form enctype="multipart/form-data" class="mx-auto mt-5" method="POST" action="{% url 'nueva_comunidad' %}">
+
+                <div class="header-text mb-4">
+                    {% csrf_token %}
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {% if message.tags == 'error' %}
+                                        <script>
+                                            notificacionSwAl('Error en la creación',
+                                                '{{ message }}',
+                                                'error',
+                                                'Aceptar')
+
+
+
+
+
+
+                                        </script>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+
+                <h2 class="cta-text">🎮⚽ Crear comunidad</h2>
+                <div class="input">
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre de comunidad"
+                           required>
+                    <input type="number" min="1" max="30" class="mt-4" name="miembros" id="miembros"
+                           placeholder="Miembros máximos"
+                           required>
+                    <input type="file" name="profile_image" id="profile_image" class="mt-4">
+                    <div class="form-check-inline mt-4 bg-transparent d-flex justify-content-center">
+                        <label class="form-check-label bg-transparent" for="privada">
+                            Comunidad Privada
+                        </label>
+                        <input class="ml-2 form-check-input" type="checkbox" value="1" id="privada" name="privada">
+                    </div>
+                </div>
+                <div class="buttons--stacked">
+                    <button type="submit" class="btn btn--capsule btn--primary">Continuar</button>
+                    <a href="{% url 'vista_elegir_comunidad' %}" class="btn btn--capsule2 btn--grey">Volver</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+</body>

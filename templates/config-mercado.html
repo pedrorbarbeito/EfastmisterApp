@@ -1,0 +1,699 @@
+{% extends 'main.html' %}
+{% load static %}
+<head>
+    {% block style %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+            body {
+                background-color: #29292a;
+                font-family: 'Poppins', sans-serif;
+                color: #ffff;
+            }
+
+
+            form {
+                border-radius: 20px;
+                background-color: transparent !important;
+            }
+
+            h4 {
+                padding-top: 15px;
+                font-size: 21px !important;
+                background: #38383d;
+            }
+
+            @media only screen and (max-width: 600px) {
+                form {
+                    width: 100% !important;
+                }
+            }
+
+            .button {
+                display: flex;
+                justify-content: center;
+            }
+
+            .btn.button {
+                width: 100%; /* Ajusta el ancho del botón según tus necesidades */
+                max-width: 400px; /* Puedes establecer un ancho máximo si lo deseas */
+                min-width: 400px;
+                background-color: #38383d;
+                padding: 20px;
+                border-radius: 10px;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+            }
+
+
+            .btn-round:hover {
+                background-color: #515154;
+            }
+
+            .btn:hover {
+                background-color: #515154;
+            }
+
+            .button h6 {
+                margin: 0;
+                font-size: 16px;
+            }
+
+            .button b {
+                font-size: 14px;
+                color: #919aa3;
+            }
+
+            .button a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .button i {
+                background-color: #38383d;
+            }
+
+            .divcentro {
+                display: flex;
+                justify-content: center;
+            }
+
+            .sw {
+                width: 100%;
+                background-color: #38383d;
+                color: #ffff;
+                transition: box-shadow .1s linear;
+                position: fixed;
+                top: 0;
+                flex-wrap: wrap;
+            }
+
+            .sw .sw-top {
+                background-color: #38383d;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 12px;
+            }
+
+            .sw-top-letf {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw-top-right {
+                background-color: #38383d;
+                width: 37.14285714px
+            }
+
+            .sw .sw-top-center {
+                background-color: #38383d;
+                flex-grow: 1;
+                margin: 0 12px;
+                overflow: hidden;
+            }
+
+            .sw .sw-title {
+                background-color: #38383d;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                font-size: 25px;
+                font-weight: 700;
+                text-align: center;
+            }
+
+            .sw .btn-round {
+                border: 0.1px solid #29292a;
+                border-radius: 50%;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 25px;
+                color: #ffff;
+            }
+
+            .mx-auto {
+                margin-right: auto !important;
+                margin-left: auto !important;
+                margin-top: 65px;
+            }
+
+            /* MODALES */
+            dialog::backdrop {
+                background-color: rgba(0, 0, 0, .55);
+                backdrop-filter: blur(5px);
+            }
+
+            dialog {
+                border-radius: 10px;
+                color: transparent;
+                background-color: #38383d;
+                font-family: 'Poppins', sans-serif;
+                max-height: 90%;
+            }
+
+            @media (min-width: 600px) {
+                dialog {
+                    min-width: 400px;
+                    max-height: 400px;
+                    min-height: 215px;
+                    margin-top: 300px;
+                    max-width: 430px;
+                    border-radius: 12px;
+                    align-self: center;
+                }
+            }
+
+            .popoup {
+                width: 100%;
+                border-radius: 12px 12px 0 0;
+                max-height: 90%;
+            }
+
+            .popup-close {
+                right: 12px;
+            }
+
+            .popup-close {
+                color: #ffff;
+                position: absolute;
+                top: 12px;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                border: 0.1px solid #29292a;
+                background-color: #38383d;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                box-shadow: none;
+                z-index: 3;
+
+            }
+
+            .popup-close:focus {
+                outline: none
+            }
+
+            .popup-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .content {
+                width: 100%;
+                padding: 8px;
+                overflow-y: auto;
+            }
+
+            .header {
+                width: 100%;
+                padding: 4px;
+                align-items: center;
+            }
+
+            .header h3 {
+                font-size: 17.24137931px;
+                color: #ffffff;
+                text-align: center;
+                align-items: center;
+            }
+
+            .input {
+                margin-top: -30px;
+            }
+
+            input[type=text], select, input[type=file] {
+                appearance: none;
+                outline: 0;
+                border: 0;
+                background-color: transparent;
+                user-select: auto;
+                height: 44px;
+                border-bottom: 2px solid #ebedf169;
+                color: #ffffff;
+                font-size: 14.48275862px;
+                margin: 0 auto;
+                display: block;
+                text-align: left;
+                width: 100%;
+                cursor: pointer;
+                transition: border .1s linear;
+            }
+
+            .footer {
+                width: 100%;
+                padding: 0 24px 24px 24px;
+            }
+
+            .buttons {
+                display: flex;
+                margin: 0 -6px;
+            }
+
+            .boton-guardar {
+                height: 44px;
+                border: #212529;
+                border-radius: 999px;
+
+                text-align: center;
+                transition: opacity .1s linear;
+                overflow: hidden;
+                font-size: 14.48275862px;
+                font-weight: 700;
+                background-color: #212529;
+                color: #ffffff;
+            }
+
+            .buttons .boton-guardar {
+                width: 100%;
+                margin: 0 6px;
+            }
+
+            .boton-guardar2 {
+                height: 44px;
+                border: #212529;
+                border-radius: 999px;
+
+                text-align: center;
+                transition: opacity .1s linear;
+                overflow: hidden;
+                font-size: 14.48275862px;
+                font-weight: 700;
+                background-color: #212529;
+                color: #ffffff;
+            }
+
+            .boton-guardar:hover {
+                background-color: #515154;
+            }
+
+            .boton-guardar2:hover {
+                background-color: #515154;
+            }
+
+            .go-back:hover {
+                background-color: #515154;
+            }
+
+            .buttons .boton-guardar2 {
+                width: 100%;
+                margin: 0 6px;
+                margin-top: 30px;
+            }
+
+            .footer {
+                width: 100%;
+                padding: 0 24px 10px 24px;
+            }
+
+            .settings-options {
+                list-style: none;
+            }
+
+            .settings-options li {
+                display: flex;
+                align-items: center;
+                color: #ffffff;
+            }
+
+            .settings-options li input {
+                margin-right: 12px;
+                flex-shrink: 0;
+            }
+
+            input[type=radio] {
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+                transition: all .1s linear;
+                border: 2px solid #ebedf1;
+                border-radius: 50%;
+            }
+
+            input {
+                appearance: none;
+                outline: 0;
+                border: 0;
+                background-color: transparent;
+                user-select: auto;
+            }
+
+            .settings-options li label {
+                flex-grow: 1;
+            }
+
+            input[type=radio]:checked {
+                border-color: #32c075;
+                background-color: #32c075;
+                box-shadow: inset 0 0 0 2px #38383d;
+            }
+
+            /* ESTILO PARA EL INPUT NUMERO DE MIEMBROS */
+
+            .number-input {
+                margin-top: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .number-input button {
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                margin: 0;
+                border: none;
+                font-size: 1.5rem;
+                background-color: transparent;
+                color: #fff;
+            }
+
+            .btn:focus {
+                box-shadow: none;
+            }
+
+            .number-input button:hover {
+                background-color: #515154;
+            }
+
+            .number-input input {
+                border: transparent;
+                background-color: transparent;
+            }
+
+            input[type=number] {
+                height: 44px;
+                border-bottom: 2px solid #ebedf169;
+                color: #ffff;
+                font-size: 14.48275862px;
+                margin: 0 auto;
+                display: block;
+                text-align: left;
+                width: 100%;
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+                transition: border .1s linear;
+            }
+
+            .number-input input[type=number]:focus {
+                outline: none;
+            }
+
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            input[type=number] {
+                -moz-appearance: textfield;
+            }
+
+
+        </style>
+    {% endblock %}
+
+</head>
+
+<body>
+{% block content %}
+    <!--! Alertas SweetAlert 2-->
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <script>
+                    notificacionSwAl('¡Actualización Guardada!',
+                        '{{ message }}',
+                        'success',
+                        'Aceptar', 'exitoso')
+
+
+                </script>
+            {% elif message.tags == 'error' %}
+                <script>
+                    notificacionSwAl('¡Actualización Fallida!',
+                        '{{ message }}',
+                        'error',
+                        'Aceptar')
+
+
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sw">
+                <div class="sw-top">
+                    <div class="sw-top-letf">
+                        <a class="btn-round" href="{% url 'configuracion_comunidad' %}"
+                           style="text-decoration: none"><</a>
+                    </div>
+                    <div class="sw-top-center">
+                        <div class="sw-title">🛒 Mercado</div>
+                    </div>
+                    <div class="sw-top-right"></div>
+                </div>
+            </div>
+            <form class="mx-auto">
+                <h6 class="mt-4">⌛ Duración del mercado</h6>
+                <div class="mb-3 mt-3 divcentro" id="abrir-modal-duracion-mercado">
+                    <a class="btn button">
+                        <h6>⌛⚽ Duración de jugadores en el mercado</h6>
+                        <b class="mt-1">{{ gestion_comunidad.duracion_jugadores_mercado }} horas máximas </b>
+                    </a>
+                </div>
+                <h6 class="mt-4">🏃🏼‍🔓 Jugadores libres</h6>
+                <div class="mb-3 mt-4 divcentro" id="abrir-modal-jugadores-libres">
+                    <a class="btn button">
+                        <h6>🏃🏼‍➕ Nº máximo de jugadores que salen al mercado</h6>
+                        <b class="mt-1">{{ gestion_comunidad.maximo_jugadores_mercado }} jugadores máximo</b>
+                    </a>
+                </div>
+                <h6 class="mt-4">🏃🏼👥‍ Jugadores de otros miembros</h6>
+                <div class="mb-3 mt-4 divcentro" id="abrir-modal-jugadores-miembros">
+                    <a class="btn button">
+                        <h6>🏃🏼‍‍➕ Nº máximo de jugadores simultáneos en venta por miembro</h6>
+                        <b class="mt-1">{{ gestion_comunidad.maximo_jugadores_simultaneo }} jugadores máximo
+                            simultaneos</b>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--! DIALOGS MODALES -->
+    {% if comunidad.administrador.id == request.user.id %}
+        <dialog id="modal-comienzo-mercado">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-duracion-mercado">X</button>
+                </b>
+                <div class="header">
+                    <h3>🏃⌛⚽ Duración de jugadores</h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="duracion_jugadores" id="duracion_jugadores" value="0"
+                                       {% if gestion_comunidad.duracion_jugadores_mercado == 8 %}checked{% endif %}>
+                                <label class="mt-2">8 horas</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="duracion_jugadores" id="duracion_jugadores" value="1"
+                                       {% if gestion_comunidad.duracion_jugadores_mercado == 12 %}checked{% endif %}>
+                                <label class="mt-2">12 horas</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="duracion_jugadores" id="duracion_jugadores" value="2"
+                                       {% if gestion_comunidad.duracion_jugadores_mercado == 24 %}checked{% endif %}>
+                                <label class="mt-2">24 horas</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-jugadores-libres">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-jugadores-libres">X</button>
+                </b>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="header">
+                        <h3>🏃🏼‍➕️ Nº máximo de jugadores</h3>
+                    </div>
+                    <div class="number-input">
+                        <button type="button" class="mr-4"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-
+                        </button>
+                        <input type="number" style="text-align: center; font-size:18px;" name="maximo_jugadores_mercado"
+                               id="maximo_jugadores_mercado" min="0" max="20" required
+                               value="{{ gestion_comunidad.maximo_jugadores_mercado }}">
+                        <button type="button" class="ml-4"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+
+                        </button>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button id="boton-guardar-jugadores-libres" class="boton-guardar2">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+
+        <dialog id="modal-jugadores-miembros">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-jugadores-miembros">X</button>
+                </b>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="header">
+                        <h3>🏃🏼‍➕️ Nº máximo de jugadores</h3>
+                    </div>
+                    <div class="number-input">
+                        <button type="button" class="mr-4"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-
+                        </button>
+                        <input type="number" style="text-align: center; font-size:18px;"
+                               name="maximo_jugadores_simultaneo"
+                               id="maximo_jugadores_simultaneo" min="1" max="5" required
+                               value="{{ gestion_comunidad.maximo_jugadores_simultaneo }}">
+                        <button type="button" class="ml-4"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">+
+                        </button>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button id="boton-guardar-jugadores-miembros" class="boton-guardar2">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+    {% else %}
+        <dialog id="modal-comienzo-mercado">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-duracion-mercado">X</button>
+                </b>
+                <div class="header">
+                    <h3>🏃⌛⚽ Duración de jugadores</h3>
+                </div>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="content">
+                        <ul class="settings-options">
+                            <li>
+                                <input type="radio" name="duracion_jugadores" id="duracion_jugadores" value="0"
+                                       {% if gestion_comunidad.duracion_jugadores_mercado == 8 %}checked{% endif %} disabled>
+                                <label class="mt-2">8 horas</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="duracion_jugadores" id="duracion_jugadores" value="1"
+                                       {% if gestion_comunidad.duracion_jugadores_mercado == 12 %}checked{% endif %} disabled>
+                                <label class="mt-2">12 horas</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="duracion_jugadores" id="duracion_jugadores" value="2"
+                                       {% if gestion_comunidad.duracion_jugadores_mercado == 24 %}checked{% endif %} disabled>
+                                <label class="mt-2">24 horas</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button class="boton-guardar" disabled>Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="modal-jugadores-libres">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-jugadores-libres">X</button>
+                </b>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="header">
+                        <h3>🏃🏼‍➕️ Nº máximo de jugadores</h3>
+                    </div>
+                    <div class="number-input">
+                        <button type="button" class="mr-4"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()" disabled>-
+                        </button>
+                        <input type="number" style="text-align: center; font-size:18px;" name="maximo_jugadores_mercado"
+                               id="maximo_jugadores_mercado" min="0" max="20" required
+                               value="{{ gestion_comunidad.maximo_jugadores_mercado }}" disabled>
+                        <button type="button" class="ml-4"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()" disabled>+
+                        </button>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button id="boton-guardar-jugadores-libres" class="boton-guardar2" disabled>Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+
+        <dialog id="modal-jugadores-miembros">
+            <div class="popoup">
+                <b>
+                    <button class="popup-close go-back" id="cerrar-modal-jugadores-miembros">X</button>
+                </b>
+                <form method="post" action="{% url 'actualizar_configuracion_comunidad' %}">
+                    {% csrf_token %}
+                    <div class="header">
+                        <h3>🏃🏼‍➕️ Nº máximo de jugadores</h3>
+                    </div>
+                    <div class="number-input">
+                        <button type="button" class="mr-4"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()" disabled>-
+                        </button>
+                        <input type="number" style="text-align: center; font-size:18px;"
+                               name="maximo_jugadores_simultaneo"
+                               id="maximo_jugadores_simultaneo" min="1" max="5" required
+                               value="{{ gestion_comunidad.maximo_jugadores_simultaneo }}" disabled>
+                        <button type="button" class="ml-4"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()" disabled>+
+                        </button>
+                    </div>
+                    <div class="footer">
+                        <div class="buttons">
+                            <button id="boton-guardar-jugadores-miembros" class="boton-guardar2" disabled>Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+    {% endif %}
+
+{% endblock %}
+</body>

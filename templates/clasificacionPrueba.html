@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+<table>
+    <thead>
+    <tr>
+        <th>Usuario</th>
+        <th>Puntos</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in clasificacion %}
+        <tr>
+            <td>{{i.user.username }}</td>
+            <td>{{ i.puntosTotales }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+</body>
+</html>

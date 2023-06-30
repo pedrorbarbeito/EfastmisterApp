@@ -1,0 +1,28 @@
+{% block content %}
+  <h1>Selecciona tu alineación</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Posición</th>
+          <th>Seleccionar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for jugador in jugadores %}
+          <tr>
+            <td>{{ jugador.nombre }}</td>
+            <td>{{ jugador.posicion }}</td>
+            <td><label>
+                <input type="checkbox" name="jugadores_seleccionados" value="{{ jugador.id }}">
+            </label></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <input type="submit" value="Guardar alineación">
+  </form>
+  <a href="{% url 'inicio' %}">Volver al inicio</a>
+{% endblock %}

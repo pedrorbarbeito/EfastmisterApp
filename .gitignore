@@ -1,0 +1,8 @@
+# .gitignore
+
+# directorios que no deseas incluir
+.idea/
+UsersApp/migrations/
+EFastMisterApp/migrations/
+db.sqlite3
+efastmister/settings.py

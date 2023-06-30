@@ -1,0 +1,88 @@
+{% load humanize %}
+<header>
+    <div class="header-top d-flex justify-content-between">
+        <!--! BOTON PARA ABRIR EL MENU IZQUIERDO DEL USUARIO -->
+        <div class="header-top-left" onclick="abrirMenu()">
+            <button id="toggle-menu" class="btn boton-menu mt-2">
+                <img class="pic" src="{{ comunidad.profile_image.url }}">
+            </button>
+        </div>
+        <div class="header-top-center">
+            <div class="title">{{ comunidad.nombre_comunidad }}</div>
+        </div>
+        <div class="header-top-right">
+            <div class="btn btn-sw btn-balance btn-header-top"><span
+                    class="saldo">{{ usuario_datos_comunidad.saldo|intcomma }}</span><img
+                    src="https://i.postimg.cc/1XV3Qjx4/images-1-1-removebg-preview.png" class="coin-real">
+            </div>
+            <a class="btn btn-sw btn-search-players btn-header-top"
+               href="{% url 'lista_jugadores_comunidad' %}">🔍</a>
+        </div>
+    </div>
+    <div class="header-menu">
+        <ul class="menu">
+            <li>
+                <a href="{% url 'pagina_principal_comunidad' id_comunidad=0 %}" class="btn navbar-switch-tab">
+                    <div class="svg">🏠</div>
+                    <div class="title {% if '/comunidades/inicio/' in request.path %}active{% endif %}">Inicio</div>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'mercado' %}" class="btn navbar-switch-tab">
+                    <div class="svg">🔁</div>
+                    <div class="title {% if request.path == '/comunidades/mercado/' %}active{% endif %}">Mercado</div>
+                </a>
+            </li>
+            <!--! SCRIPT PARA ENVIAR A UNA U OTRA PLANTILLA SI EL USUARIO TIENE O NO EN ESA COMUNIDAD -->
+            <li>
+                <a href="{% url 'crear_plantilla' %}" class="btn navbar-switch-tab"
+                   onclick="redirigirSiExistePlantilla(event)">
+                    <div class="svg">⚽</div>
+                    <div class="title {% if request.path == '/comunidades/jugadores-plantilla/' %}active{% endif %}">Equipo
+                </div>
+                </a>
+            </li>
+            <li>
+            <a href="{% url 'clasificacion' %}" class="btn  navbar-switch-tab">
+                <div class="svg">🏆</div>
+                <div class="title {% if request.path == '/comunidades/clasificacion/' %}active{% endif %}">Tabla
+                </div>
+            </a>
+            </li>
+            <li>
+                <a href="{% url 'more' %}" class="btn  navbar-switch-tab">
+                    <div class="svg">⋮</div>
+                    <div class="title {% if request.path == '/comunidades/more/' %}active{% endif %}">Más</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+<script>
+    function redirigirSiExistePlantilla(event) {
+        event.preventDefault();
+        // Obtener la plantilla existente
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '{% url 'obtener-plantilla-existente' %}', true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var plantillaExistente = JSON.parse(xhr.responseText).plantillaExistente;
+
+                if (plantillaExistente) {
+                    // Redirigir al usuario a la página de la plantilla
+                    window.location.href = '{% url 'jugadores-plantilla' %}';
+                } else {
+                    // Redirigir a la página de creación de plantilla
+                    window.location.href = '{% url 'crear_plantilla' %}';
+                }
+            } else {
+                console.error('Error al obtener el valor de plantilla_existente:', xhr.status);
+            }
+        };
+        xhr.send();
+    }
+</script>
+</header>
+
+

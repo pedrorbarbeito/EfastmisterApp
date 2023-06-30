@@ -1,0 +1,383 @@
+{% extends 'main.html' %}
+{% load static %}
+<head>
+    {% block style %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+            body {
+                background-color: #29292a;
+                font-family: 'Poppins', sans-serif;
+                color: #ffff;
+            }
+
+            .wrapper {
+                max-width: 500px;
+                margin: auto;
+            }
+
+            .topbar {
+                align-items: center;
+                display: flex;
+                min-height: 75px;
+                width: 100%;
+                padding: 18px;
+                position: relative;
+            }
+
+            .topbar-back {
+                position: absolute;
+                top: 18px;
+                left: 18px;
+            }
+
+            .btn {
+                align-items: center;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                outline: 0;
+                position: relative;
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            }
+
+            .btn--circle {
+                border: 0.1px solid #38383d;
+                border-radius: 50%;
+                width: 37.14285714px;
+                height: 37.14285714px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /* background-color: #38383d; */
+                font-size: 25px;
+                color: #ffff;
+                padding: 8px;
+            }
+
+            a.btn.btn--circle {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .btn:focus {
+                box-shadow: none;
+            }
+
+            .btn:hover {
+                background-color: #515154;
+            }
+
+            .topbar-title {
+                text-align: center;
+                flex-grow: 1;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .container--h-spaced {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .container--v-spaced {
+                padding-top: 18px;
+                padding-bottom: 18px;
+            }
+
+            .list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .list-item:first-child {
+                margin-top: 0;
+            }
+
+            .list-item {
+                margin-top: 12px;
+            }
+
+            .btn-block {
+                display: block;
+                width: 100%;
+            }
+
+            .btn-box {
+                background-color: #38383d;
+                border-radius: 12px;
+                text-align: left;
+                width: 100%;
+                padding: 18px;
+            }
+
+            .list-item-info {
+                display: flex;
+                flex-shrink: 0;
+                align-items: center;
+                width: 100%;
+            }
+
+            .list-item-title {
+                color: #fff;
+                flex: 1;
+                margin: 0;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .list-item-image:last-child {
+                margin-right: 0;
+            }
+
+            .list-item-image {
+                height: 24px;
+                margin-right: 12px;
+                width: 24px;
+                font-size: 1.3rem;
+            }
+
+            i.bi.bi-arrow-right {
+                text-decoration: none;
+                display: flex;
+                color: #ffff;
+            }
+
+            .list-item-description {
+                color: #f8f9faa1;
+                font-size: 0.95rem;
+                flex-shrink: 0;
+                margin: 12px 0 0;
+                width: 100%;
+                display: block;
+            }
+
+            .separator {
+                margin: 24px 0;
+                border-bottom: 1.5px solid #f8f9faa1;
+                text-align: center;
+                position: relative;
+                color: #f8f9faa1;
+            }
+
+            .separator-label {
+                align-items: center;
+                background: #29292a;
+                display: flex;
+                height: 40px;
+                justify-content: center;
+                left: 50%;
+                margin: -20px auto auto -20px;
+                position: absolute;
+                top: 50%;
+                width: 40px;
+            }
+
+            .sw-top-search {
+                background-color: #38383d;
+                border-radius: 999px;
+                border: 0;
+                text-align: center;
+                width: 100%;
+                height: 37.14285714px;
+                color: #ffff;
+            }
+
+            input[type=text] {
+                height: 44px;
+                border-bottom: 2px solid #ebedf169;
+                color: #ffffff;
+                font-size: 14.48275862px;
+                margin: 0 auto;
+                display: block;
+                text-align: center;
+                width: 100%;
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+                transition: border .1s linear;
+            }
+
+            input, select, textarea {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                outline: 0;
+                border: 0;
+                background-color: transparent;
+                -webkit-user-select: auto;
+                -moz-user-select: auto;
+                -ms-user-select: auto;
+                user-select: auto;
+            }
+
+            button {
+                overflow: visible;
+            }
+
+            button {
+                margin: 0;
+                font-family: inherit;
+                font-size: inherit;
+                line-height: inherit;
+            }
+
+            .pic {
+                width: 50px;
+                height: 50px;
+                border-radius: 55%;
+                object-fit: cover;
+                position: relative;
+                color: #fff;
+                font-size: 17.24137931px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .span-equipo{
+                display: flex;
+                color: #f8f9faa1;
+                font-size: 0.75rem;
+            }
+        </style>
+    {% endblock %}
+</head>
+
+<body>
+{% block content %}
+
+    <!--! Alertas SweetAlert2 -->
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'info' %}
+                <script>
+                    notificacionSwAl('',
+                        '{{ message }}',
+                        'info',
+                        'Aceptar', 'info')
+                </script>
+            {% elif message.tags == 'error' %}
+                <script>
+                    notificacionSwAl('No has podido unirte',
+                        '{{ message }}',
+                        'error',
+                        'Aceptar')
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <div class="wrapper">
+        <div class="topbar">
+            <div class="topbar-back">
+                <a href="{% url 'pagina_principal_comunidad' id_comunidad=0 %}" class="btn btn--circle"><</a>
+            </div>
+            <div class="topbar-title">
+                <h1>Añadir una Liga</h1>
+            </div>
+        </div>
+        <div class="container container--v-spaced container--h-spaced">
+            <div class="options-default">
+                <ul class="list">
+                    <li class="list-item">
+                        <a href="{% url 'vista_crear_comunidad' %}" class="btn btn-box btn-block">
+                            <div class="list-item-info">
+                                <h3 class="list-item-title">👨‍👨‍👦 Crea una liga con tus amigos</h3>
+                                <div class="list-item-image -sm"><i class="bi bi-arrow-right"></i></div>
+                            </div>
+                            <p class="list-item-description">
+                                Juega en una liga privada con tus amigos. Tendrás control absoluto sobre esta
+                                liga
+                            </p>
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <a href="{% url 'comunidad_aleatoria' %}" class="btn btn-box btn-block">
+                            <div class="list-item-info">
+                                <h3 class="list-item-title">🌍 Únete a una liga aleatoria</h3>
+                                <div class="list-item-image -sm"><i class="bi bi-arrow-right"></i></div>
+                            </div>
+                            <p class="list-item-description">
+                                Juega en una liga privada contra otros usuarios y compite para demostrar quién
+                                es el mejor
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="separator">
+                <span class="separator-label"> o </span>
+            </div>
+            <div class="options-other">
+                <ul class="list">
+                    <li class="list-item">
+                        <a href="{% url 'vista_unirse_comunidad' %}" class="btn btn-box btn-block">
+                            <div class="list-item-info">
+                                <h3 class="list-item-title">🎮 Unirse a una liga de amigos</h3>
+                                <div class="list-item-image -sm"><i class="bi bi-arrow-right"></i></div>
+                            </div>
+                            <p class="list-item-description">
+                                Unete y juega en una liga privada de tus amigos y compite contra ellos
+                            </p>
+                        </a>
+                    </li>
+                    <li class="list-item">
+                        <input id="buscador" class="sw-top-search mt-3" type="text" name="search"
+                               placeholder="🔍 Buscar ligas públicas"
+                               autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" value>
+
+                        {% for comunidad, cantidad_usuarios in comunidades_publicas.items %}
+                            <a href="{% url 'acceso_comunidad_publica' comunidad.id %}"
+                               class="btn btn-box btn-block mt-3 comunidad">
+                                <div class="list-item-info">
+                                    <img class="pic"
+                                         src="{{ comunidad.profile_image.url }}">
+                                    <h3 class="list-item-title ml-2">{{ comunidad.nombre_comunidad }} <span class=" span-equipo mt-1">{{ comunidad.fecha_creacion }}</span></h3>
+                                    <div class="list-item-image -sm"><i class="bi bi-arrow-right"></i></div>
+                                </div>
+                                <p class="list-item-description">
+                                    <b style="color:#ffff">🌍👨‍👨‍👦</b> Nª de miembtros <b>{{ cantidad_usuarios }} de {{ comunidad.cantidad_miembros }}</b>
+                                </p>
+
+                            </a>
+                        {% endfor %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('#buscador').on('input', function () {
+                var query = $(this).val().toLowerCase();
+
+                $('.comunidad').each(function () {
+                    var nombreComunidad = $(this).text().toLowerCase();
+
+                    if (nombreComunidad.includes(query)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
+</body>
